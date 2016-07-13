@@ -1,0 +1,417 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		94B945DA1ABC74F751152694 /* Pods_Photogenic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F1AE4DADAA081610CFDF94C /* Pods_Photogenic.framework */; };
+		CF2695C71D343D2900C77D5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2695C61D343D2900C77D5E /* AppDelegate.swift */; };
+		CF2695CC1D343D2900C77D5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF2695CA1D343D2900C77D5E /* Main.storyboard */; };
+		CF2695CE1D343D2900C77D5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF2695CD1D343D2900C77D5E /* Assets.xcassets */; };
+		CF2695D11D343D2900C77D5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF2695CF1D343D2900C77D5E /* LaunchScreen.storyboard */; };
+		CF2695E61D3564B600C77D5E /* StartingViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2695E51D3564B600C77D5E /* StartingViewViewController.swift */; };
+		CF2695E81D3564CA00C77D5E /* ListRemindersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2695E71D3564CA00C77D5E /* ListRemindersViewController.swift */; };
+		CF2695EA1D3564D400C77D5E /* MakeReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2695E91D3564D400C77D5E /* MakeReminderViewController.swift */; };
+		CF2695EC1D3565B600C77D5E /* ListRemindersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2695EB1D3565B600C77D5E /* ListRemindersTableViewCell.swift */; };
+		CF2695F01D35678C00C77D5E /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2695EF1D35678C00C77D5E /* Reminder.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		66C9CF621089DF2C496243FF /* Pods-Photogenic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Photogenic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Photogenic/Pods-Photogenic.debug.xcconfig"; sourceTree = "<group>"; };
+		6F1AE4DADAA081610CFDF94C /* Pods_Photogenic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Photogenic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E35A882B60D1AE2805186F4 /* Pods-Photogenic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Photogenic.release.xcconfig"; path = "Pods/Target Support Files/Pods-Photogenic/Pods-Photogenic.release.xcconfig"; sourceTree = "<group>"; };
+		CF2695C31D343D2900C77D5E /* Photogenic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Photogenic.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF2695C61D343D2900C77D5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CF2695CB1D343D2900C77D5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CF2695CD1D343D2900C77D5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CF2695D01D343D2900C77D5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CF2695D21D343D2900C77D5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CF2695E51D3564B600C77D5E /* StartingViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartingViewViewController.swift; sourceTree = "<group>"; };
+		CF2695E71D3564CA00C77D5E /* ListRemindersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListRemindersViewController.swift; sourceTree = "<group>"; };
+		CF2695E91D3564D400C77D5E /* MakeReminderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakeReminderViewController.swift; sourceTree = "<group>"; };
+		CF2695EB1D3565B600C77D5E /* ListRemindersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListRemindersTableViewCell.swift; sourceTree = "<group>"; };
+		CF2695EF1D35678C00C77D5E /* Reminder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CF2695C01D343D2900C77D5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				94B945DA1ABC74F751152694 /* Pods_Photogenic.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		24FE6807CE82FF44B023ED91 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				66C9CF621089DF2C496243FF /* Pods-Photogenic.debug.xcconfig */,
+				7E35A882B60D1AE2805186F4 /* Pods-Photogenic.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		62B769FA938B3D5E8C45F68A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6F1AE4DADAA081610CFDF94C /* Pods_Photogenic.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CF2695BA1D343D2900C77D5E = {
+			isa = PBXGroup;
+			children = (
+				CF2695C51D343D2900C77D5E /* Photogenic */,
+				CF2695C41D343D2900C77D5E /* Products */,
+				24FE6807CE82FF44B023ED91 /* Pods */,
+				62B769FA938B3D5E8C45F68A /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		CF2695C41D343D2900C77D5E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CF2695C31D343D2900C77D5E /* Photogenic.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CF2695C51D343D2900C77D5E /* Photogenic */ = {
+			isa = PBXGroup;
+			children = (
+				CF2695DA1D344A5B00C77D5E /* Views */,
+				CF2695D91D344A4B00C77D5E /* Controllers */,
+				CF2695D81D344A3B00C77D5E /* Models */,
+				CF2695C61D343D2900C77D5E /* AppDelegate.swift */,
+				CF2695CA1D343D2900C77D5E /* Main.storyboard */,
+				CF2695CD1D343D2900C77D5E /* Assets.xcassets */,
+				CF2695CF1D343D2900C77D5E /* LaunchScreen.storyboard */,
+				CF2695D21D343D2900C77D5E /* Info.plist */,
+			);
+			path = Photogenic;
+			sourceTree = "<group>";
+		};
+		CF2695D81D344A3B00C77D5E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CF2695EF1D35678C00C77D5E /* Reminder.swift */,
+			);
+			name = Models;
+			path = ../../Models;
+			sourceTree = "<group>";
+		};
+		CF2695D91D344A4B00C77D5E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CF2695E51D3564B600C77D5E /* StartingViewViewController.swift */,
+				CF2695E71D3564CA00C77D5E /* ListRemindersViewController.swift */,
+				CF2695E91D3564D400C77D5E /* MakeReminderViewController.swift */,
+			);
+			name = Controllers;
+			path = ../../Controllers;
+			sourceTree = "<group>";
+		};
+		CF2695DA1D344A5B00C77D5E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CF2695EB1D3565B600C77D5E /* ListRemindersTableViewCell.swift */,
+			);
+			name = Views;
+			path = ../../Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CF2695C21D343D2900C77D5E /* Photogenic */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CF2695D51D343D2900C77D5E /* Build configuration list for PBXNativeTarget "Photogenic" */;
+			buildPhases = (
+				824D34DFE043997E39624E75 /* [CP] Check Pods Manifest.lock */,
+				CF2695BF1D343D2900C77D5E /* Sources */,
+				CF2695C01D343D2900C77D5E /* Frameworks */,
+				CF2695C11D343D2900C77D5E /* Resources */,
+				30C4E48BC06019FD31566EA7 /* [CP] Embed Pods Frameworks */,
+				030F8B70B424E826531C4C08 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Photogenic;
+			productName = Photogenic;
+			productReference = CF2695C31D343D2900C77D5E /* Photogenic.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CF2695BB1D343D2900C77D5E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = Makeschool;
+				TargetAttributes = {
+					CF2695C21D343D2900C77D5E = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = D4AJ56MMMV;
+					};
+				};
+			};
+			buildConfigurationList = CF2695BE1D343D2900C77D5E /* Build configuration list for PBXProject "Photogenic" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CF2695BA1D343D2900C77D5E;
+			productRefGroup = CF2695C41D343D2900C77D5E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CF2695C21D343D2900C77D5E /* Photogenic */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CF2695C11D343D2900C77D5E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF2695D11D343D2900C77D5E /* LaunchScreen.storyboard in Resources */,
+				CF2695CE1D343D2900C77D5E /* Assets.xcassets in Resources */,
+				CF2695CC1D343D2900C77D5E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		030F8B70B424E826531C4C08 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Photogenic/Pods-Photogenic-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		30C4E48BC06019FD31566EA7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Photogenic/Pods-Photogenic-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		824D34DFE043997E39624E75 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CF2695BF1D343D2900C77D5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF2695EA1D3564D400C77D5E /* MakeReminderViewController.swift in Sources */,
+				CF2695C71D343D2900C77D5E /* AppDelegate.swift in Sources */,
+				CF2695E61D3564B600C77D5E /* StartingViewViewController.swift in Sources */,
+				CF2695F01D35678C00C77D5E /* Reminder.swift in Sources */,
+				CF2695E81D3564CA00C77D5E /* ListRemindersViewController.swift in Sources */,
+				CF2695EC1D3565B600C77D5E /* ListRemindersTableViewCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		CF2695CA1D343D2900C77D5E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CF2695CB1D343D2900C77D5E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		CF2695CF1D343D2900C77D5E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CF2695D01D343D2900C77D5E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CF2695D31D343D2900C77D5E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CF2695D41D343D2900C77D5E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CF2695D61D343D2900C77D5E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 66C9CF621089DF2C496243FF /* Pods-Photogenic.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Photogenic/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.makeschool.Photogenic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		CF2695D71D343D2900C77D5E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7E35A882B60D1AE2805186F4 /* Pods-Photogenic.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Photogenic/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.makeschool.Photogenic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CF2695BE1D343D2900C77D5E /* Build configuration list for PBXProject "Photogenic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF2695D31D343D2900C77D5E /* Debug */,
+				CF2695D41D343D2900C77D5E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CF2695D51D343D2900C77D5E /* Build configuration list for PBXNativeTarget "Photogenic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF2695D61D343D2900C77D5E /* Debug */,
+				CF2695D71D343D2900C77D5E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CF2695BB1D343D2900C77D5E /* Project object */;
+}
