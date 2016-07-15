@@ -2,12 +2,17 @@
 //  Reminder.swift
 //  Photogenic
 //
-//  Created by Steve Jiang on 7/12/16.
+//  Created by Steve Jiang on 7/14/16.
 //  Copyright © 2016 Makeschool. All rights reserved.
 //
 
+import Foundation
+import UIKit
+import RealmSwift
 
-import Parse
-class Reminder: NSObject {
-
+class Reminder: Object{
+    dynamic var time = ""
+    dynamic var name = ""
+    dynamic var reminderDescription = ""
+    dynamic var img: UIImage?
 }

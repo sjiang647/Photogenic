@@ -13,6 +13,6 @@ target 'Photogenic' do
   pod 'Parse'
   pod 'ParseFacebookUtilsV4'
   pod 'ParseUI'
-
-
+  pod 'IQKeyboardManager’
+pod 'RealmSwift'
 end

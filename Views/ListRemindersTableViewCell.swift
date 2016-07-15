@@ -8,13 +8,17 @@
 
 import Foundation
 import UIKit
+import Parse
+
 class ListRemindersTableViewCell: UITableViewCell{
     @IBOutlet var backgroundImage: UIImageView!
     
+   
     @IBOutlet var cellName: UILabel!
     @IBOutlet var cellTime: UILabel!
     
     @IBOutlet var cellDescription: UILabel!
+    
    
     
 }
