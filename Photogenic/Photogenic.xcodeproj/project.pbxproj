@@ -21,6 +21,7 @@
 		CF2695EA1D3564D400C77D5E /* MakeReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2695E91D3564D400C77D5E /* MakeReminderViewController.swift */; };
 		CF2695EC1D3565B600C77D5E /* ListRemindersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2695EB1D3565B600C77D5E /* ListRemindersTableViewCell.swift */; };
 		CF2696101D36FFE200C77D5E /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF26960F1D36FFE200C77D5E /* FriendsViewController.swift */; };
+		CF2C04D31D397B14001A1C9A /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C04D21D397B14001A1C9A /* RealmHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		CF2695E91D3564D400C77D5E /* MakeReminderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakeReminderViewController.swift; sourceTree = "<group>"; };
 		CF2695EB1D3565B600C77D5E /* ListRemindersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListRemindersTableViewCell.swift; sourceTree = "<group>"; };
 		CF26960F1D36FFE200C77D5E /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		CF2C04D21D397B14001A1C9A /* RealmHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				CF2695D21D343D2900C77D5E /* Info.plist */,
 				CF141AD51D383A9700A8E053 /* ParseHelper.swift */,
 				CF141AD71D38401200A8E053 /* ErrorHandling.swift */,
+				CF2C04D21D397B14001A1C9A /* RealmHelper.swift */,
 			);
 			path = Photogenic;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 				CF141AD41D38321600A8E053 /* FriendSearchTableViewCell.swift in Sources */,
 				CF2695E81D3564CA00C77D5E /* ListRemindersViewController.swift in Sources */,
 				CF141AD61D383A9700A8E053 /* ParseHelper.swift in Sources */,
+				CF2C04D31D397B14001A1C9A /* RealmHelper.swift in Sources */,
 				CF141AD81D38401200A8E053 /* ErrorHandling.swift in Sources */,
 				CF2695EC1D3565B600C77D5E /* ListRemindersTableViewCell.swift in Sources */,
 				CF1139651D38584100EC0104 /* Reminder.swift in Sources */,

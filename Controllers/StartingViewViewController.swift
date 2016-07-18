@@ -75,6 +75,8 @@ class StartingViewViewController: UIViewController,UIImagePickerControllerDelega
                 print("no rear camera detected")
             }
         } else {
+            self.img = UIImage(named: "happiestman")
+            self.performSegueWithIdentifier("cameraToEdit", sender: self)
             print("camera inaccessible")
         }
         
