@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EZ1-rW-bx2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="4ZB-aq-Wye">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -124,12 +124,13 @@
                         <barButtonItem key="leftBarButtonItem" title="Item" id="p0T-EN-XJf"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="OyY-CS-Lze">
                             <connections>
-                                <segue destination="ynk-ZP-5q9" kind="show" identifier="backToCamera" id="JPS-sS-7cO"/>
+                                <action selector="addReminder:" destination="Cas-Ww-mZ4" id="lgg-Gc-LAw"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="hMQ-NC-vdL" id="ksB-aD-Fys"/>
+                        <segue destination="Ql4-hg-hg1" kind="show" identifier="cameraToEdit" id="hU9-Iy-Eft"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kuw-Kn-W5e" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -140,7 +141,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="469" y="236"/>
+            <point key="canvasLocation" x="1209" y="256"/>
         </scene>
         <!--makeReminder-->
         <scene sceneID="cBr-N0-aJI">
@@ -154,7 +155,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MM/DD/YY HH:MM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hSM-as-n6P">
+                            <imageView userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eAd-WR-3cA">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="MM/DD/YY HH:MM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hSM-as-n6P">
                                 <rect key="frame" x="20" y="125" width="148" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="148" id="kR3-Mp-Yzx"/>
@@ -163,7 +167,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FpG-co-SsZ">
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FpG-co-SsZ">
                                 <rect key="frame" x="28" y="70" width="300" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qph-bE-Jox">
@@ -210,7 +214,13 @@
                                     <constraint firstAttribute="height" constant="30" id="vPU-zT-jyo"/>
                                 </constraints>
                             </stackView>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="IDR-UL-HKi">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" text="Description here.." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ksi-Zj-kiu">
+                                <rect key="frame" x="20" y="327" width="560" height="133"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <datePicker contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="IDR-UL-HKi">
                                 <rect key="frame" x="40" y="154" width="520" height="165"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="165" id="vRP-hl-8XP"/>
@@ -219,15 +229,6 @@
                                     <!--2016-07-11 22:54:40 +0000-->
                                 </date>
                             </datePicker>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Description here.." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ksi-Zj-kiu">
-                                <rect key="frame" x="20" y="327" width="560" height="133"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <imageView userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eAd-WR-3cA">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -254,12 +255,12 @@
                     <navigationItem key="navigationItem" title="Edit Reminder" id="uNd-Jz-9hX">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Y40-aE-w5X">
                             <connections>
-                                <action selector="cancelTapped:" destination="Ql4-hg-hg1" id="8Wu-nt-2RG"/>
+                                <segue destination="ebW-H3-muH" kind="unwind" identifier="cancel" unwindAction="unwindToListReviewViewController:" id="LcY-Cn-RGV"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="gX8-hw-iIi">
                             <connections>
-                                <action selector="doneTapped:" destination="Ql4-hg-hg1" id="RUD-AQ-CVX"/>
+                                <segue destination="ebW-H3-muH" kind="unwind" identifier="done" unwindAction="unwindToListReviewViewController:" id="zaJ-h4-pWL"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -273,18 +274,17 @@
                         <outlet property="shareWithTextField" destination="CGn-I7-uoW" id="wD4-A4-nwx"/>
                         <outlet property="tapGesture" destination="MQv-Qd-fLU" id="Wjc-o7-Djx"/>
                         <outlet property="time" destination="hSM-as-n6P" id="ZKQ-Dr-tP6"/>
-                        <segue destination="Cas-Ww-mZ4" kind="show" identifier="cancel" id="G84-jV-iR7"/>
-                        <segue destination="Cas-Ww-mZ4" kind="show" identifier="done" id="E59-90-imj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uno-IF-IUE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="ebW-H3-muH" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="MQv-Qd-fLU">
                     <connections>
                         <action selector="dismissKeyboard:" destination="Ql4-hg-hg1" id="H4N-Zf-HO5"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-292" y="1130"/>
+            <point key="canvasLocation" x="2006" y="244"/>
         </scene>
         <!--startingView-->
         <scene sceneID="pfB-Vc-yZp">
@@ -298,13 +298,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Ky-6G-Z3a">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="QFL-Zk-Vl1" appends="YES" id="I2h-UO-vh1"/>
-                                </connections>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZDg-EG-7dc">
                                 <rect key="frame" x="225" y="495" width="150" height="30"/>
                                 <constraints>
@@ -315,7 +308,7 @@
                                     <action selector="takePicture:" destination="ynk-ZP-5q9" eventType="touchUpInside" id="vVS-uM-2m0"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sAs-gW-Ycp">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sAs-gW-Ycp">
                                 <rect key="frame" x="20" y="28" width="75" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="Een-Bh-vPo"/>
@@ -326,6 +319,13 @@
                                     <action selector="goToFriends:" destination="ynk-ZP-5q9" eventType="touchUpInside" id="ITM-QC-i1x"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Ky-6G-Z3a">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="QFL-Zk-Vl1" appends="YES" id="I2h-UO-vh1"/>
+                                </connections>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -342,15 +342,14 @@
                     <navigationItem key="navigationItem" title="Camera" id="0UN-pl-dGh"/>
                     <connections>
                         <outlet property="cameraView" destination="8Ky-6G-Z3a" id="PbT-8T-Vuw"/>
-                        <segue destination="Cas-Ww-mZ4" kind="show" identifier="goToList" id="rMh-eH-UEl"/>
+                        <segue destination="4ZB-aq-Wye" kind="show" identifier="goToList" id="rMh-eH-UEl"/>
                         <segue destination="8gT-9S-K5K" kind="show" identifier="showFriends" id="GYr-of-Dzm"/>
-                        <segue destination="Ql4-hg-hg1" kind="show" identifier="cameraToEdit" id="Koc-av-x3k"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OkM-Hl-L5s" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <swipeGestureRecognizer direction="left" id="QFL-Zk-Vl1"/>
             </objects>
-            <point key="canvasLocation" x="1579" y="556"/>
+            <point key="canvasLocation" x="-507" y="-48"/>
         </scene>
         <!--friendsList-->
         <scene sceneID="83b-3l-kpG">
@@ -445,30 +444,28 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PxZ-OF-RrO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Cwm-qE-PYO" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1579" y="1435"/>
+            <point key="canvasLocation" x="-367" y="1123"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="R3v-Wn-4PW">
+        <scene sceneID="bLp-8M-Zd7">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EZ1-rW-bx2" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4ZB-aq-Wye" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bLW-AU-f1w">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qgu-gR-qJI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="ynk-ZP-5q9" kind="relationship" relationship="rootViewController" id="fmL-oK-WRc"/>
+                        <segue destination="Cas-Ww-mZ4" kind="relationship" relationship="rootViewController" id="eNS-5m-DPh"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1M2-MP-ES6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u4T-IS-CGD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="613" y="1388"/>
+            <point key="canvasLocation" x="397" y="256"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="auo-Mj-ton"/>
-        <segue reference="E59-90-imj"/>
-        <segue reference="JPS-sS-7cO"/>
     </inferredMetricsTieBreakers>
 </document>

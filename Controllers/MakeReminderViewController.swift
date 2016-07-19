@@ -10,14 +10,14 @@ import Foundation
 import UIKit
 class MakeReminderViewController: UIViewController{
     
-    @IBAction func doneTapped(sender: UIBarButtonItem) {
-        print("inside donetapped")
-        self.performSegueWithIdentifier("done", sender: self)
-    }
-    @IBAction func cancelTapped(sender: UIBarButtonItem) {
-        print("canceltapped")
-        self.performSegueWithIdentifier("cancel", sender: self)
-    }
+//    @IBAction func doneTapped(sender: UIBarButtonItem) {
+//        print("inside donetapped")
+//        self.performSegueWithIdentifier("done", sender: self)
+//    }
+//    @IBAction func cancelTapped(sender: UIBarButtonItem) {
+//        print("canceltapped")
+//        self.performSegueWithIdentifier("cancel", sender: self)
+//    }
     @IBOutlet var backgroundImage: UIImageView!
     var reminder: Reminder?
     @IBOutlet var time: UILabel!
@@ -30,24 +30,22 @@ class MakeReminderViewController: UIViewController{
     @IBOutlet var reminderDescription: UITextView!
     @IBOutlet var datePicker: UIDatePicker!
     var daet = ""
-    var img : UIImage!
-    @IBAction func exit(){
-        
-    }
+    var img : UIImage?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         datePicker.addTarget(self, action: #selector(MakeReminderViewController.datePickerChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
         backgroundImage.image = self.img
         datePicker.minimumDate = NSDate()
         
+        
         self.view.addGestureRecognizer(tapGesture)
+        //label colors
         nameTextField.backgroundColor = UIColor.clearColor()
         shareWithTextField.backgroundColor = UIColor.clearColor()
         reminderDescription.backgroundColor = UIColor.clearColor()
         datePicker.backgroundColor = UIColor.clearColor()
-        if let reminder = reminder{
-            self.backgroundImage.image = self.img
-        }
+       
     }
     //Changes the label for the date whenever the time scroll wheel changes
     func datePickerChanged(datePicker:UIDatePicker) {
@@ -71,10 +69,8 @@ class MakeReminderViewController: UIViewController{
             newReminder.name = nameTextField.text ?? "Untitled"
             newReminder.reminderDescription = reminderDescription.text ?? "No Description.."
             newReminder.time = time.text!
-            newReminder.img = UIImagePNGRepresentation(self.img)
+            newReminder.img = UIImagePNGRepresentation(self.img!)
             if let reminder = reminder {
-                // 1
-                //                listRemindersViewController.tableView.reloadData()
                 RealmHelper.updateReminder(reminder, newReminder: newReminder)
             } else {
                 // if note does not exist, create new note
@@ -82,7 +78,8 @@ class MakeReminderViewController: UIViewController{
                 RealmHelper.addReminder(newReminder)
                 
             }
-            //            listRemindersViewController.reminders = RealmHelper.retrieveReminders()
+            
+            listRemindersViewController.reminders = RealmHelper.retrieveReminders()
         }else if segue.identifier == "cancel"{
             print("cancelled new Post")
         }
