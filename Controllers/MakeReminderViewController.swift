@@ -8,34 +8,43 @@
 
 import Foundation
 import UIKit
+import RealmSwift
+
+
 class MakeReminderViewController: UIViewController{
     
-//    @IBAction func doneTapped(sender: UIBarButtonItem) {
-//        print("inside donetapped")
-//        self.performSegueWithIdentifier("done", sender: self)
-//    }
-//    @IBAction func cancelTapped(sender: UIBarButtonItem) {
-//        print("canceltapped")
-//        self.performSegueWithIdentifier("cancel", sender: self)
-//    }
-    @IBOutlet var backgroundImage: UIImageView!
+    @IBAction func doneTapped(sender: UIBarButtonItem) {
+        print("inside donetapped")
+        self.performSegueWithIdentifier("done", sender: self)
+    }
+    @IBAction func cancelTapped(sender: UIBarButtonItem) {
+        print("canceltapped")
+        self.performSegueWithIdentifier("cancel", sender: self)
+    }
+    @IBOutlet weak var backgroundImage: UIImageView!
     var reminder: Reminder?
-    @IBOutlet var time: UILabel!
+    @IBOutlet weak var time: UILabel!
     var keyboardOffset = 80.0
-    @IBOutlet var tapGesture: UITapGestureRecognizer!
-    @IBOutlet var name: UILabel!
-    @IBOutlet var nameTextField: UITextField!
-    @IBOutlet var shareWith: UILabel!
-    @IBOutlet var shareWithTextField: UITextField!
-    @IBOutlet var reminderDescription: UITextView!
-    @IBOutlet var datePicker: UIDatePicker!
+    @IBOutlet weak var tapGesture: UITapGestureRecognizer!
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var shareWith: UILabel!
+    @IBOutlet weak var shareWithTextField: UITextField!
+    @IBOutlet weak var reminderDescription: UITextView!
+    @IBOutlet weak var datePicker: UIDatePicker!
+    var dane: NSDate?
     var daet = ""
     var img : UIImage?
+    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         datePicker.addTarget(self, action: #selector(MakeReminderViewController.datePickerChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
         backgroundImage.image = self.img
+        print("viewDidLoad")
+        print(self.reminder?.name)
+        
         datePicker.minimumDate = NSDate()
         
         
@@ -57,18 +66,23 @@ class MakeReminderViewController: UIViewController{
         let strDate = dateFormatter.stringFromDate(datePicker.date)
         time.text = strDate
         daet = strDate
+        dane = datePicker.date
     }
     
     //prepareForSegue for unwind back into listReminders
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let listRemindersViewController = segue.destinationViewController as! ListRemindersViewController
         print("prepareFor")
+        
+        
+        
         if segue.identifier == "done" {
             // if note exists, update title and content
             let newReminder = Reminder()
             newReminder.name = nameTextField.text ?? "Untitled"
             newReminder.reminderDescription = reminderDescription.text ?? "No Description.."
-            newReminder.time = time.text!
+            newReminder.time = daet
+            newReminder.tiem = dane
             newReminder.img = UIImagePNGRepresentation(self.img!)
             if let reminder = reminder {
                 RealmHelper.updateReminder(reminder, newReminder: newReminder)
@@ -79,10 +93,11 @@ class MakeReminderViewController: UIViewController{
                 
             }
             
-            listRemindersViewController.reminders = RealmHelper.retrieveReminders()
+            
         }else if segue.identifier == "cancel"{
             print("cancelled new Post")
         }
+//        listRemindersViewController.reminders = RealmHelper.retrieveReminders()
     }
     
     //        if let identifier = segue.identifier {
@@ -123,6 +138,7 @@ class MakeReminderViewController: UIViewController{
             nameTextField.text = reminder.name
             reminderDescription.text = reminder.reminderDescription
             time.text = daet
+            datePicker.date = dane!
             shareWithTextField.text = ""
         } else {
             // 3

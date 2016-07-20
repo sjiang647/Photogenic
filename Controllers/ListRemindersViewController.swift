@@ -11,7 +11,7 @@ import UIKit
 import RealmSwift
 class ListRemindersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     let imagePicker: UIImagePickerController! = UIImagePickerController()
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!
     var reminders: Results<Reminder>! {
         didSet {
             tableView.reloadData()
@@ -31,6 +31,8 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
                 print("no rear camera detected")
             }
         } else {
+            self.img = UIImage(named: "happiestman")
+            self.performSegueWithIdentifier("cameraToEdit", sender: self)
             print("camera inaccessible")
         }
         
@@ -66,6 +68,12 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
         recognizer.direction = .Right
         self.view .addGestureRecognizer(recognizer)
         //get reminders
+        RealmHelper.notificationToken = RealmHelper.realm.addNotificationBlock { [unowned self] note, realm in
+            dispatch_async(dispatch_get_main_queue(), { 
+                self.tableView.reloadData()
+            })
+            
+        }
         self.reminders = RealmHelper.retrieveReminders()
         //camera
         if (UIImagePickerController.isSourceTypeAvailable(.Camera)) {
@@ -127,6 +135,10 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! ListRemindersTableViewCell
         self.img = cell.backgroundImage.image
         self.selectedRecminder = reminders[indexPath.row]
+        print(indexPath.row)
+        print(self.selectedRecminder?.name)
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        self.performSegueWithIdentifier("cameraToEdit", sender: self)
     }
     
     
@@ -135,7 +147,7 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
         if editingStyle == .Delete {
             RealmHelper.deleteReminder(reminders[indexPath.row])
             //2
-            reminders = RealmHelper.retrieveReminders()
+//            reminders = RealmHelper.retrieveReminders()
         }
     }
     
@@ -143,16 +155,7 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
         //check if segue has identifier
         if let identifier = segue.identifier {
             //what to execute when identifier = cancel
-            if identifier == "editReminder" {
-                print("Table view cell tapped")
-                //                let indexPath = tableView.indexPathForSelectedRow!
-                //                let reminderCell = reminders[indexPath.row]
-                let makeReminderViewController = segue.destinationViewController as! MakeReminderViewController
-                //                makeReminderViewController.reminder = reminderCell
-                makeReminderViewController.img = self.img
-                makeReminderViewController.reminder = self.selectedRecminder
-                // makeReminderViewController.backgroundImage.image = imers
-            } else if identifier == "cameraToEdit" {
+            if identifier == "cameraToEdit" {
                 print("+ button tapped")
                  let makeReminderViewController = segue.destinationViewController as! MakeReminderViewController
                 makeReminderViewController.img = img

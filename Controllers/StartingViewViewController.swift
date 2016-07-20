@@ -14,7 +14,7 @@ class StartingViewViewController: UIViewController,UIImagePickerControllerDelega
     @IBAction func goToFriends(sender: AnyObject) {
         self.performSegueWithIdentifier("showFriends", sender: self)
     }
-    @IBOutlet var cameraView: UIImageView!
+    @IBOutlet weak var cameraView: UIImageView!
     let imagePicker: UIImagePickerController! = UIImagePickerController()
     
     //take picture

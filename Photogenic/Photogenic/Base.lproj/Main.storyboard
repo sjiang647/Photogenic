@@ -29,7 +29,7 @@
                                     <tabBarItem title="Others" id="JD0-DJ-sZW"/>
                                 </items>
                             </tabBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hMQ-NC-vdL">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hMQ-NC-vdL">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -95,7 +95,6 @@
                                             <outlet property="cellDescription" destination="Tm0-p0-bMP" id="IAp-fI-vnt"/>
                                             <outlet property="cellName" destination="tFU-je-0iD" id="psu-2X-jb6"/>
                                             <outlet property="cellTime" destination="aLQ-9v-Cgr" id="HCd-lI-s7a"/>
-                                            <segue destination="Ql4-hg-hg1" kind="show" identifier="editReminder" id="auo-Mj-ton"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -255,12 +254,12 @@
                     <navigationItem key="navigationItem" title="Edit Reminder" id="uNd-Jz-9hX">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Y40-aE-w5X">
                             <connections>
-                                <segue destination="ebW-H3-muH" kind="unwind" identifier="cancel" unwindAction="unwindToListReviewViewController:" id="LcY-Cn-RGV"/>
+                                <action selector="cancelTapped:" destination="Ql4-hg-hg1" id="oev-Bk-jtR"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="gX8-hw-iIi">
                             <connections>
-                                <segue destination="ebW-H3-muH" kind="unwind" identifier="done" unwindAction="unwindToListReviewViewController:" id="zaJ-h4-pWL"/>
+                                <action selector="doneTapped:" destination="Ql4-hg-hg1" id="0yW-rP-w7p"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -274,6 +273,8 @@
                         <outlet property="shareWithTextField" destination="CGn-I7-uoW" id="wD4-A4-nwx"/>
                         <outlet property="tapGesture" destination="MQv-Qd-fLU" id="Wjc-o7-Djx"/>
                         <outlet property="time" destination="hSM-as-n6P" id="ZKQ-Dr-tP6"/>
+                        <segue destination="ebW-H3-muH" kind="unwind" identifier="cancel" unwindAction="unwindToListReviewViewController:" id="QLX-r3-R8m"/>
+                        <segue destination="ebW-H3-muH" kind="unwind" identifier="done" unwindAction="unwindToListReviewViewController:" id="kyq-yg-RhC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uno-IF-IUE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -308,7 +309,7 @@
                                     <action selector="takePicture:" destination="ynk-ZP-5q9" eventType="touchUpInside" id="vVS-uM-2m0"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sAs-gW-Ycp">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sAs-gW-Ycp">
                                 <rect key="frame" x="20" y="28" width="75" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="Een-Bh-vPo"/>
@@ -465,7 +466,4 @@
             <point key="canvasLocation" x="397" y="256"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="auo-Mj-ton"/>
-    </inferredMetricsTieBreakers>
 </document>
