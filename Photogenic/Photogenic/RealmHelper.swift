@@ -36,7 +36,8 @@ class RealmHelper {
             reminderToBeUpdated.reminderDescription = newReminder.reminderDescription
             reminderToBeUpdated.time = newReminder.time
             reminderToBeUpdated.img = newReminder.img
-            reminderToBeUpdated.tiem = newReminder.tiem
+          //  reminderToBeUpdated.tiem = newReminder.tiem
+            reminderToBeUpdated.doot = newReminder.doot
         }
     }
     

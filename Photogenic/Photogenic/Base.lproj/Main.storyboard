@@ -40,7 +40,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="99.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Puc-Ww-7ay">
+                                                <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Puc-Ww-7ay">
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="99"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tFU-je-0iD">
@@ -154,7 +154,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eAd-WR-3cA">
+                            <imageView userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eAd-WR-3cA">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="MM/DD/YY HH:MM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hSM-as-n6P">
@@ -219,8 +219,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <datePicker contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="IDR-UL-HKi">
-                                <rect key="frame" x="40" y="154" width="520" height="165"/>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="IDR-UL-HKi">
+                                <rect key="frame" x="35" y="198" width="530" height="165"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="165" id="vRP-hl-8XP"/>
                                 </constraints>
@@ -231,12 +231,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="IDR-UL-HKi" secondAttribute="trailing" constant="20" id="4Gc-9e-GF0"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="IDR-UL-HKi" secondAttribute="trailing" constant="15" id="4Gc-9e-GF0"/>
                             <constraint firstItem="eAd-WR-3cA" firstAttribute="leading" secondItem="Cjh-Tx-2YQ" secondAttribute="leading" id="5Zi-lj-vXH"/>
                             <constraint firstItem="IDR-UL-HKi" firstAttribute="top" secondItem="hSM-as-n6P" secondAttribute="bottom" constant="8" id="9lL-zJ-Ne0"/>
                             <constraint firstItem="Ksi-Zj-kiu" firstAttribute="top" secondItem="IDR-UL-HKi" secondAttribute="bottom" constant="8" id="EOg-US-bVW"/>
                             <constraint firstItem="dZa-Gg-JGd" firstAttribute="top" secondItem="eAd-WR-3cA" secondAttribute="bottom" id="F9l-kS-1vq"/>
-                            <constraint firstItem="IDR-UL-HKi" firstAttribute="leading" secondItem="Cjh-Tx-2YQ" secondAttribute="leadingMargin" constant="20" id="Hl2-SS-KcS"/>
+                            <constraint firstItem="IDR-UL-HKi" firstAttribute="leading" secondItem="Cjh-Tx-2YQ" secondAttribute="leadingMargin" constant="15" id="Hl2-SS-KcS"/>
                             <constraint firstAttribute="trailing" secondItem="7Rf-8W-DQX" secondAttribute="trailing" constant="24" id="ORA-ZW-eZU"/>
                             <constraint firstItem="7Rf-8W-DQX" firstAttribute="leading" secondItem="Cjh-Tx-2YQ" secondAttribute="leadingMargin" constant="-8" id="RcY-wG-H1p"/>
                             <constraint firstItem="FpG-co-SsZ" firstAttribute="top" secondItem="kRj-Wi-ySL" secondAttribute="bottom" constant="50" id="WEn-rd-gam"/>

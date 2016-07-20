@@ -32,15 +32,16 @@ class MakeReminderViewController: UIViewController{
     @IBOutlet weak var shareWithTextField: UITextField!
     @IBOutlet weak var reminderDescription: UITextView!
     @IBOutlet weak var datePicker: UIDatePicker!
-    var dane: NSDate?
-    var daet = ""
+    var dateNSFormat: NSDate?
+    var dateStrFormat = ""
     var img : UIImage?
     
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        datePicker.addTarget(self, action: #selector(MakeReminderViewController.datePickerChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        print("insideViewDidLoad")
+                datePicker.addTarget(self, action: #selector(MakeReminderViewController.datePickerChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
         backgroundImage.image = self.img
         print("viewDidLoad")
         print(self.reminder?.name)
@@ -56,6 +57,8 @@ class MakeReminderViewController: UIViewController{
         datePicker.backgroundColor = UIColor.clearColor()
        
     }
+    
+    
     //Changes the label for the date whenever the time scroll wheel changes
     func datePickerChanged(datePicker:UIDatePicker) {
         let dateFormatter = NSDateFormatter()
@@ -65,8 +68,9 @@ class MakeReminderViewController: UIViewController{
         
         let strDate = dateFormatter.stringFromDate(datePicker.date)
         time.text = strDate
-        daet = strDate
-        dane = datePicker.date
+        dateStrFormat = strDate
+        dateNSFormat = datePicker.date
+      //  dane = datePicker.date
     }
     
     //prepareForSegue for unwind back into listReminders
@@ -81,8 +85,10 @@ class MakeReminderViewController: UIViewController{
             let newReminder = Reminder()
             newReminder.name = nameTextField.text ?? "Untitled"
             newReminder.reminderDescription = reminderDescription.text ?? "No Description.."
-            newReminder.time = daet
-            newReminder.tiem = dane
+            newReminder.time = dateStrFormat
+            newReminder.doot = dateNSFormat
+            print(newReminder.doot)
+            print(newReminder.time)
             newReminder.img = UIImagePNGRepresentation(self.img!)
             if let reminder = reminder {
                 RealmHelper.updateReminder(reminder, newReminder: newReminder)
@@ -132,21 +138,29 @@ class MakeReminderViewController: UIViewController{
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        print("inside viewWillAppear")
+
         // 1
         if let reminder = reminder {
             // 2
             nameTextField.text = reminder.name
             reminderDescription.text = reminder.reminderDescription
-            time.text = daet
-            datePicker.date = dane!
+            time.text = reminder.time
+            //datePicker.date = dane!
             shareWithTextField.text = ""
+            datePicker.setDate(dateNSFormat!, animated: true)
+            datePicker.date = dateNSFormat!
+
         } else {
             // 3
             
             nameTextField.text = ""
             reminderDescription.text = ""
-            time.text = daet
+            time.text = ""
+           // datePicker.date = dane!
+            //datePicker.setDate(dateNSFormat!, animated: true)
             shareWithTextField.text = ""
+            dateNSFormat = datePicker.date
         }
         
     }
@@ -155,4 +169,22 @@ class MakeReminderViewController: UIViewController{
     
     
     
+    
+}
+extension NSDate {
+    func convertToString() -> String {
+        return NSDateFormatter.localizedStringFromDate(self, dateStyle: NSDateFormatterStyle.MediumStyle, timeStyle: NSDateFormatterStyle.MediumStyle)
+    }
+}
+extension String{
+    static func backToDate(string:String) -> NSDate{
+        let formatter = NSDateFormatter()
+        formatter.timeStyle = NSDateFormatterStyle.MediumStyle
+        formatter.dateStyle = NSDateFormatterStyle.MediumStyle
+        formatter.dateFormat = "MMM dd,yy, HH:mm:ss a"
+        formatter
+        let dateString: NSDate = formatter.dateFromString(string)!
+        return dateString
+    }
+
 }

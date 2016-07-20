@@ -31,13 +31,16 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
                 print("no rear camera detected")
             }
         } else {
-            self.img = UIImage(named: "happiestman")
-            self.performSegueWithIdentifier("cameraToEdit", sender: self)
+//            self.img = UIImage(named: "happiestman")
+//            self.performSegueWithIdentifier("cameraToEdit", sender: self)
             print("camera inaccessible")
         }
         
     }
-    var img:UIImage?
+    
+    
+    var img: UIImage?
+    var date: NSDate?
     var selectedRecminder:Reminder?
 
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
@@ -116,7 +119,7 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
         //imer is converting the img NSData from the reminder model to a UIImage to display in the background
         let imer = UIImage(data: reminder.img!)
         
-        cell.cellTime.text = reminder.time
+        cell.cellTime.text = reminder.doot!.convertToString()
         cell.cellDescription.text = reminder.reminderDescription
         
         
@@ -134,6 +137,9 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! ListRemindersTableViewCell
         self.img = cell.backgroundImage.image
+        
+        self.date = String.backToDate(cell.cellTime.text!)
+        
         self.selectedRecminder = reminders[indexPath.row]
         print(indexPath.row)
         print(self.selectedRecminder?.name)
@@ -159,6 +165,7 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
                 print("+ button tapped")
                  let makeReminderViewController = segue.destinationViewController as! MakeReminderViewController
                 makeReminderViewController.img = img
+                makeReminderViewController.dateNSFormat = date
                 makeReminderViewController.reminder = self.selectedRecminder
                 
             }

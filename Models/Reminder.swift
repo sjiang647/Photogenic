@@ -11,7 +11,7 @@ import UIKit
 import RealmSwift
 
 class Reminder: Object{
-    dynamic var tiem:NSDate?
+    dynamic var doot: NSDate?
     dynamic var time = ""
     dynamic var name = ""
     dynamic var reminderDescription = ""
