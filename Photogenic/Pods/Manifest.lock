@@ -6,6 +6,7 @@ PODS:
     - Bolts/Tasks
   - Bolts/Tasks (1.7.0)
   - Bond (4.0.0)
+  - BSForegroundNotification (0.3.1)
   - ConvenienceKit (0.4.0)
   - DateTools (1.7.0)
   - FBSDKCoreKit (4.13.1):
@@ -13,6 +14,7 @@ PODS:
   - FBSDKLoginKit (4.13.1):
     - FBSDKCoreKit
   - IQKeyboardManager (4.0.3)
+  - MGSwipeTableCell (1.5.5)
   - Parse (1.13.0):
     - Bolts/Tasks (~> 1.6)
   - ParseFacebookUtilsV4 (1.11.1):
@@ -29,31 +31,48 @@ PODS:
   - Realm/Headers (1.0.1)
   - RealmSwift (1.0.1):
     - Realm (= 1.0.1)
+  - WDImagePicker (0.2.2)
 
 DEPENDENCIES:
   - Bond (= 4.0.0)
+  - BSForegroundNotification
   - ConvenienceKit
   - DateTools
   - IQKeyboardManager
+  - MGSwipeTableCell
   - Parse
   - ParseFacebookUtilsV4
   - ParseUI
   - RealmSwift
+  - WDImagePicker (from `https://github.com/justwudi/WDImagePicker.git`, tag `0.2.2`)
+
+EXTERNAL SOURCES:
+  WDImagePicker:
+    :git: https://github.com/justwudi/WDImagePicker.git
+    :tag: 0.2.2
+
+CHECKOUT OPTIONS:
+  WDImagePicker:
+    :git: https://github.com/justwudi/WDImagePicker.git
+    :tag: 0.2.2
 
 SPEC CHECKSUMS:
   Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
   Bond: b729cdb22552def86efd4adfd8b8d93061eb4649
+  BSForegroundNotification: 47c9042b34d62dae79cd6424c1c0480a94671c47
   ConvenienceKit: ba1ad8797897dc0d011676e961a2f3e9b270c841
   DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
   FBSDKCoreKit: 2807fe0da2ddb49a1469da6d6ff597f99912980f
   FBSDKLoginKit: 6d350cb6a22d6956e9d078885de6ee8a0ebc51b4
   IQKeyboardManager: be9695ffc5a52077deb4847608f338771022d6d1
+  MGSwipeTableCell: bafeb5f351124544c9364ecbdf24c7b06a37d340
   Parse: f51c24d2feb412e4b2d6cc73d37cb24e8d0089bc
   ParseFacebookUtilsV4: 2f30c2b7021c8005d3042781da7ef87d06589421
   ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
   Realm: 2e15e39d35b08abb529e212ed5d8af107b5236c8
   RealmSwift: d73ea2af08c3676dbdd5e4b669651a0f492162a4
+  WDImagePicker: 0014e231d67a63db9a97db74332a8a16723809bc
 
-PODFILE CHECKSUM: ddccdac246fb611734262d01040ec96448e34130
+PODFILE CHECKSUM: 8ac8a7d82ec6cdf9e8edec9cba7ab0e57a1e225b
 
 COCOAPODS: 1.0.1

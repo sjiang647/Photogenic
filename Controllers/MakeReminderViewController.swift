@@ -9,45 +9,87 @@
 import Foundation
 import UIKit
 import RealmSwift
-
-
-class MakeReminderViewController: UIViewController{
+import BSForegroundNotification
+import AudioToolbox
+class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegroundNotificationDelegate{
     
     @IBAction func doneTapped(sender: UIBarButtonItem) {
         print("inside donetapped")
+        let pickerDate = self.datePicker.date
+        if let string = nameTextField.text{
+            nameTextField.text = nameTextField.text
+        }else{
+            nameTextField.text = "reminder at \(pickerDate)"
+        }
+        differenceBetweenDates = NSDate().timeIntervalSinceDate(pickerDate)
+        let localNotification = UILocalNotification()
+        localNotification.fireDate = pickerDate
+        //        localNotification.applicationIconBadgeNumber += 1
+        localNotification.alertBody = "Don't forget about \(nameTextField.text!)!!!"
+        localNotification.soundName = UILocalNotificationDefaultSoundName
+        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+        NSNotificationCenter.defaultCenter().postNotificationName("reloadData", object: self)
+        BSForegroundNotification.systemSoundID = 1001
+        let notification = BSForegroundNotification(userInfo: userInfoForCategory("ONE_BUTTON"))
+        
+        
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(differenceBetweenDates! * Double(NSEC_PER_SEC))), dispatch_get_main_queue()){ () -> Void in
+            notification.presentNotification()
+        }
+        notification.delegate = self
+        
+        print("reminder is nil")
         self.performSegueWithIdentifier("done", sender: self)
+        
     }
+    
     @IBAction func cancelTapped(sender: UIBarButtonItem) {
         print("canceltapped")
         self.performSegueWithIdentifier("cancel", sender: self)
     }
+    //var appDelegate: AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var backgroundImage: UIImageView!
     var reminder: Reminder?
     @IBOutlet weak var time: UILabel!
     var keyboardOffset = 80.0
     @IBOutlet weak var tapGesture: UITapGestureRecognizer!
-    @IBOutlet weak var name: UILabel!
     @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var shareWith: UILabel!
     @IBOutlet weak var shareWithTextField: UITextField!
     @IBOutlet weak var reminderDescription: UITextView!
     @IBOutlet weak var datePicker: UIDatePicker!
+    
+    var differenceBetweenDates: NSTimeInterval?
+    
     var dateNSFormat: NSDate?
     var dateStrFormat = ""
     var img : UIImage?
+    //let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    private func userInfoForCategory(category: String) -> [NSObject: AnyObject] {
+        
+        return ["aps": [
+            "category": category,
+            "alert": [
+                "body": "Don't forget about \(nameTextField.text!)",
+                "title": "Photogenic"
+            ],
+            "sound": "sound.wav"
+            ]
+        ]
+    }
     
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("insideViewDidLoad")
-                datePicker.addTarget(self, action: #selector(MakeReminderViewController.datePickerChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        datePicker.addTarget(self, action: #selector(MakeReminderViewController.datePickerChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
         backgroundImage.image = self.img
         print("viewDidLoad")
         print(self.reminder?.name)
-        
-        datePicker.minimumDate = NSDate()
-        
+        let calendar = NSCalendar.currentCalendar()
+        let date = calendar.dateByAddingUnit(.Minute, value: 5, toDate: NSDate(), options: [])     // used to be `.CalendarUnitMinute`
+        datePicker.minimumDate = date
         
         self.view.addGestureRecognizer(tapGesture)
         //label colors
@@ -55,9 +97,33 @@ class MakeReminderViewController: UIViewController{
         shareWithTextField.backgroundColor = UIColor.clearColor()
         reminderDescription.backgroundColor = UIColor.clearColor()
         datePicker.backgroundColor = UIColor.clearColor()
-       
+        self.reminderDescription.layer.borderColor = UIColor.blackColor().CGColor
+        self.reminderDescription.layer.borderWidth = 1.0
+        
+        differenceBetweenDates = 310
+        let dateFormatter = NSDateFormatter()
+        
+        dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
+        dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
+        
+        let strDate = dateFormatter.stringFromDate(datePicker.date)
+        time.text = strDate
+        datePicker.setValue(UIColor.whiteColor(), forKeyPath: "textColor")
+        datePicker.setValue(0.8, forKeyPath: "alpha")
     }
     
+    func textViewDidBeginEditing(textView: UITextView) {
+        self.descriptionLabel.hidden = true
+    }
+    
+    //    func textViewDidChange(textView: UITextView) {
+    //        self.descriptionLabel.hidden = reminderDescription.text.characters.count > 0
+    //    }
+    //
+    //    func textViewDidEndEditing(textView: UITextView) {
+    //        self.descriptionLabel.hidden = reminderDescription.text.characters.count > 0
+    //    }
+    //
     
     //Changes the label for the date whenever the time scroll wheel changes
     func datePickerChanged(datePicker:UIDatePicker) {
@@ -70,7 +136,9 @@ class MakeReminderViewController: UIViewController{
         time.text = strDate
         dateStrFormat = strDate
         dateNSFormat = datePicker.date
-      //  dane = datePicker.date
+        AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+        
+        //  dane = datePicker.date
     }
     
     //prepareForSegue for unwind back into listReminders
@@ -103,7 +171,7 @@ class MakeReminderViewController: UIViewController{
         }else if segue.identifier == "cancel"{
             print("cancelled new Post")
         }
-//        listRemindersViewController.reminders = RealmHelper.retrieveReminders()
+        //        listRemindersViewController.reminders = RealmHelper.retrieveReminders()
     }
     
     //        if let identifier = segue.identifier {
@@ -139,7 +207,7 @@ class MakeReminderViewController: UIViewController{
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         print("inside viewWillAppear")
-
+        
         // 1
         if let reminder = reminder {
             // 2
@@ -150,14 +218,14 @@ class MakeReminderViewController: UIViewController{
             shareWithTextField.text = ""
             datePicker.setDate(dateNSFormat!, animated: true)
             datePicker.date = dateNSFormat!
-
+            
         } else {
             // 3
             
             nameTextField.text = ""
             reminderDescription.text = ""
             time.text = ""
-           // datePicker.date = dane!
+            // datePicker.date = dane!
             //datePicker.setDate(dateNSFormat!, animated: true)
             shareWithTextField.text = ""
             dateNSFormat = datePicker.date
@@ -186,5 +254,5 @@ extension String{
         let dateString: NSDate = formatter.dateFromString(string)!
         return dateString
     }
-
+    
 }

@@ -16,5 +16,7 @@ class Reminder: Object{
     dynamic var name = ""
     dynamic var reminderDescription = ""
     dynamic var img: NSData?
+    //dynamic var notification: UILocalNotification?
+    
     
 }

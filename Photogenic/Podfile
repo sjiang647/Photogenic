@@ -7,12 +7,15 @@ target 'Photogenic' do
 
   # Pods for Photogenic
 
- pod 'Bond', '4.0.0'
+  pod 'Bond', '4.0.0'
   pod 'DateTools'
   pod "ConvenienceKit"
   pod 'Parse'
   pod 'ParseFacebookUtilsV4'
   pod 'ParseUI'
+  pod 'MGSwipeTableCell'
   pod 'IQKeyboardManager’
-pod 'RealmSwift'
+  pod 'RealmSwift'
+  pod 'BSForegroundNotification'
+  pod 'WDImagePicker', :git => 'https://github.com/justwudi/WDImagePicker.git', :tag => '0.2.2'
 end

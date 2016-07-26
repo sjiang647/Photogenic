@@ -9,7 +9,9 @@
 import Foundation
 import UIKit
 import RealmSwift
-class ListRemindersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+import MGSwipeTableCell
+//import "CameraSessionView.h"
+class ListRemindersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate,MGSwipeTableCellDelegate{
     let imagePicker: UIImagePickerController! = UIImagePickerController()
     @IBOutlet weak var tableView: UITableView!
     var reminders: Results<Reminder>! {
@@ -31,8 +33,8 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
                 print("no rear camera detected")
             }
         } else {
-//            self.img = UIImage(named: "happiestman")
-//            self.performSegueWithIdentifier("cameraToEdit", sender: self)
+            //            self.img = UIImage(named: "happiestman")
+            //            self.performSegueWithIdentifier("cameraToEdit", sender: self)
             print("camera inaccessible")
         }
         
@@ -42,7 +44,7 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
     var img: UIImage?
     var date: NSDate?
     var selectedRecminder:Reminder?
-
+    
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         print("Got an image")
         if let pickedImage:UIImage = (info[UIImagePickerControllerOriginalImage]) as? UIImage {
@@ -53,10 +55,11 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
         imagePicker.dismissViewControllerAnimated(true, completion: {
             // Anything you want to happen when the user saves an image
             print("imagePicker.dismiss")
+            let rec: Reminder
             self.performSegueWithIdentifier("cameraToEdit", sender: self)
         })
     }
-
+    
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         print("User canceled image")
         dismissViewControllerAnimated(true, completion: {
@@ -68,15 +71,17 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
         super.viewDidLoad()
         //swipe recognition
         let recognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "swipeRight:")
+        tableView.delegate = self
         recognizer.direction = .Right
         self.view .addGestureRecognizer(recognizer)
         //get reminders
         RealmHelper.notificationToken = RealmHelper.realm.addNotificationBlock { [unowned self] note, realm in
-            dispatch_async(dispatch_get_main_queue(), { 
+            dispatch_async(dispatch_get_main_queue(), {
                 self.tableView.reloadData()
             })
             
         }
+        
         self.reminders = RealmHelper.retrieveReminders()
         //camera
         if (UIImagePickerController.isSourceTypeAvailable(.Camera)) {
@@ -91,11 +96,11 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
                 print("no rear camera detected")
             }
         } else {
-//            self.img = UIImage(named: "happiestman")
-//            self.performSegueWithIdentifier("cameraToEdit", sender: self)
+            //            self.img = UIImage(named: "happiestman")
+            //            self.performSegueWithIdentifier("cameraToEdit", sender: self)
             print("camera inaccessible")
         }
-
+        tableView.reloadData()
     }
     //swipe recognition
     func swipeRight(recognizer : UISwipeGestureRecognizer) {
@@ -109,6 +114,8 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
     }
     // var imers: UIImage?
     
+    
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("listRemindersTableViewCell", forIndexPath: indexPath) as! ListRemindersTableViewCell
         //display what is on the table view
@@ -121,41 +128,48 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
         
         cell.cellTime.text = reminder.doot!.convertToString()
         cell.cellDescription.text = reminder.reminderDescription
-        
-        
         cell.backgroundImage.image = imer
-        //        if let image = imer{
-        //            imers = imer
-        //        }
-        /**
-         //delete comment section if want to add modificationTimeLabel
-         cell.noteModificationTimeLabel.text = note.modificationTime.convertToString()
-         **/
+        cell.rightButtons = [MGSwipeButton(title: "Delete", backgroundColor: UIColor.redColor(), callback: {
+            (sender: MGSwipeTableCell!) -> Bool in
+            
+            RealmHelper.deleteReminder(self.reminders[indexPath.row])
+            self.reminders = RealmHelper.retrieveReminders()
+            return true
+        })]
+        cell.rightSwipeSettings.transition = MGSwipeTransition.Rotate3D
+        
         return cell
     }
+    
+    
+    
+    
+    
+    
+    
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! ListRemindersTableViewCell
         self.img = cell.backgroundImage.image
         
         self.date = String.backToDate(cell.cellTime.text!)
-        
         self.selectedRecminder = reminders[indexPath.row]
         print(indexPath.row)
         print(self.selectedRecminder?.name)
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         self.performSegueWithIdentifier("cameraToEdit", sender: self)
     }
+    //    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    //        if editingStyle == .Delete {
+    //
+    //                print("Convenience callback for swipe buttons!")
+    //                                RealmHelper.deleteReminder(self.reminders[indexPath.row])
+    //
+    //            self.reminders = RealmHelper.retrieveReminders()
+    //
+    //        }
+    //    }
     
-    
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        // 2
-        if editingStyle == .Delete {
-            RealmHelper.deleteReminder(reminders[indexPath.row])
-            //2
-//            reminders = RealmHelper.retrieveReminders()
-        }
-    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         //check if segue has identifier
@@ -163,7 +177,7 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
             //what to execute when identifier = cancel
             if identifier == "cameraToEdit" {
                 print("+ button tapped")
-                 let makeReminderViewController = segue.destinationViewController as! MakeReminderViewController
+                let makeReminderViewController = segue.destinationViewController as! MakeReminderViewController
                 makeReminderViewController.img = img
                 makeReminderViewController.dateNSFormat = date
                 makeReminderViewController.reminder = self.selectedRecminder

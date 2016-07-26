@@ -9,19 +9,15 @@
 /* Begin PBXBuildFile section */
 		94B945DA1ABC74F751152694 /* Pods_Photogenic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F1AE4DADAA081610CFDF94C /* Pods_Photogenic.framework */; };
 		CF1139651D38584100EC0104 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1139641D38584100EC0104 /* Reminder.swift */; };
-		CF141AD41D38321600A8E053 /* FriendSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF141AD31D38321600A8E053 /* FriendSearchTableViewCell.swift */; };
-		CF141AD61D383A9700A8E053 /* ParseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF141AD51D383A9700A8E053 /* ParseHelper.swift */; };
-		CF141AD81D38401200A8E053 /* ErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF141AD71D38401200A8E053 /* ErrorHandling.swift */; };
 		CF2695C71D343D2900C77D5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2695C61D343D2900C77D5E /* AppDelegate.swift */; };
 		CF2695CC1D343D2900C77D5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF2695CA1D343D2900C77D5E /* Main.storyboard */; };
 		CF2695CE1D343D2900C77D5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF2695CD1D343D2900C77D5E /* Assets.xcassets */; };
 		CF2695D11D343D2900C77D5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF2695CF1D343D2900C77D5E /* LaunchScreen.storyboard */; };
-		CF2695E61D3564B600C77D5E /* StartingViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2695E51D3564B600C77D5E /* StartingViewViewController.swift */; };
 		CF2695E81D3564CA00C77D5E /* ListRemindersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2695E71D3564CA00C77D5E /* ListRemindersViewController.swift */; };
 		CF2695EA1D3564D400C77D5E /* MakeReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2695E91D3564D400C77D5E /* MakeReminderViewController.swift */; };
 		CF2695EC1D3565B600C77D5E /* ListRemindersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2695EB1D3565B600C77D5E /* ListRemindersTableViewCell.swift */; };
-		CF2696101D36FFE200C77D5E /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF26960F1D36FFE200C77D5E /* FriendsViewController.swift */; };
 		CF2C04D31D397B14001A1C9A /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C04D21D397B14001A1C9A /* RealmHelper.swift */; };
+		CF6C04DB1D47CE9700C2A030 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF6C04DA1D47CE9700C2A030 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,21 +25,17 @@
 		6F1AE4DADAA081610CFDF94C /* Pods_Photogenic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Photogenic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E35A882B60D1AE2805186F4 /* Pods-Photogenic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Photogenic.release.xcconfig"; path = "Pods/Target Support Files/Pods-Photogenic/Pods-Photogenic.release.xcconfig"; sourceTree = "<group>"; };
 		CF1139641D38584100EC0104 /* Reminder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
-		CF141AD31D38321600A8E053 /* FriendSearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendSearchTableViewCell.swift; sourceTree = "<group>"; };
-		CF141AD51D383A9700A8E053 /* ParseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseHelper.swift; sourceTree = "<group>"; };
-		CF141AD71D38401200A8E053 /* ErrorHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandling.swift; sourceTree = "<group>"; };
 		CF2695C31D343D2900C77D5E /* Photogenic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Photogenic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF2695C61D343D2900C77D5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF2695CB1D343D2900C77D5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CF2695CD1D343D2900C77D5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CF2695D01D343D2900C77D5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CF2695D21D343D2900C77D5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CF2695E51D3564B600C77D5E /* StartingViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartingViewViewController.swift; sourceTree = "<group>"; };
 		CF2695E71D3564CA00C77D5E /* ListRemindersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListRemindersViewController.swift; sourceTree = "<group>"; };
 		CF2695E91D3564D400C77D5E /* MakeReminderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakeReminderViewController.swift; sourceTree = "<group>"; };
 		CF2695EB1D3565B600C77D5E /* ListRemindersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListRemindersTableViewCell.swift; sourceTree = "<group>"; };
-		CF26960F1D36FFE200C77D5E /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		CF2C04D21D397B14001A1C9A /* RealmHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
+		CF6C04DA1D47CE9700C2A030 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF6C04DB1D47CE9700C2A030 /* AVFoundation.framework in Frameworks */,
 				94B945DA1ABC74F751152694 /* Pods_Photogenic.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -70,6 +63,7 @@
 		62B769FA938B3D5E8C45F68A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CF6C04DA1D47CE9700C2A030 /* AVFoundation.framework */,
 				6F1AE4DADAA081610CFDF94C /* Pods_Photogenic.framework */,
 			);
 			name = Frameworks;
@@ -96,7 +90,6 @@
 		CF2695C51D343D2900C77D5E /* Photogenic */ = {
 			isa = PBXGroup;
 			children = (
-				CF26960C1D36F55B00C77D5E /* Segues */,
 				CF2695DA1D344A5B00C77D5E /* Views */,
 				CF2695D91D344A4B00C77D5E /* Controllers */,
 				CF2695D81D344A3B00C77D5E /* Models */,
@@ -105,8 +98,6 @@
 				CF2695CD1D343D2900C77D5E /* Assets.xcassets */,
 				CF2695CF1D343D2900C77D5E /* LaunchScreen.storyboard */,
 				CF2695D21D343D2900C77D5E /* Info.plist */,
-				CF141AD51D383A9700A8E053 /* ParseHelper.swift */,
-				CF141AD71D38401200A8E053 /* ErrorHandling.swift */,
 				CF2C04D21D397B14001A1C9A /* RealmHelper.swift */,
 			);
 			path = Photogenic;
@@ -124,10 +115,8 @@
 		CF2695D91D344A4B00C77D5E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				CF2695E51D3564B600C77D5E /* StartingViewViewController.swift */,
 				CF2695E71D3564CA00C77D5E /* ListRemindersViewController.swift */,
 				CF2695E91D3564D400C77D5E /* MakeReminderViewController.swift */,
-				CF26960F1D36FFE200C77D5E /* FriendsViewController.swift */,
 			);
 			name = Controllers;
 			path = ../../Controllers;
@@ -137,18 +126,9 @@
 			isa = PBXGroup;
 			children = (
 				CF2695EB1D3565B600C77D5E /* ListRemindersTableViewCell.swift */,
-				CF141AD31D38321600A8E053 /* FriendSearchTableViewCell.swift */,
 			);
 			name = Views;
 			path = ../../Views;
-			sourceTree = "<group>";
-		};
-		CF26960C1D36F55B00C77D5E /* Segues */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Segues;
-			path = ../../Segues;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -274,15 +254,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CF2696101D36FFE200C77D5E /* FriendsViewController.swift in Sources */,
 				CF2695EA1D3564D400C77D5E /* MakeReminderViewController.swift in Sources */,
 				CF2695C71D343D2900C77D5E /* AppDelegate.swift in Sources */,
-				CF2695E61D3564B600C77D5E /* StartingViewViewController.swift in Sources */,
-				CF141AD41D38321600A8E053 /* FriendSearchTableViewCell.swift in Sources */,
 				CF2695E81D3564CA00C77D5E /* ListRemindersViewController.swift in Sources */,
-				CF141AD61D383A9700A8E053 /* ParseHelper.swift in Sources */,
 				CF2C04D31D397B14001A1C9A /* RealmHelper.swift in Sources */,
-				CF141AD81D38401200A8E053 /* ErrorHandling.swift in Sources */,
 				CF2695EC1D3565B600C77D5E /* ListRemindersTableViewCell.swift in Sources */,
 				CF1139651D38584100EC0104 /* Reminder.swift in Sources */,
 			);
