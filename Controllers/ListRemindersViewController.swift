@@ -36,8 +36,8 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
                 print("no rear camera detected")
             }
         } else {
-            //            self.img = UIImage(named: "happiestman")
-            //            self.performSegueWithIdentifier("cameraToEdit", sender: self)
+                        self.img = UIImage(named: "happiestman")
+                        self.performSegueWithIdentifier("cameraToEdit", sender: self)
             print("camera inaccessible")
         }
         
@@ -54,7 +54,7 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
             // Anything you want to happen when the user saves an image
             print("imagePicker.dismiss")
             let rec: Reminder
-            self.performSegueWithIdentifier("cameraToEdit", sender: self)
+            self.performSegueWithIdentifier("addReminder", sender: self)
         })
     }
     
@@ -94,8 +94,8 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
                 print("no rear camera detected")
             }
         } else {
-            //            self.img = UIImage(named: "happiestman")
-            //            self.performSegueWithIdentifier("cameraToEdit", sender: self)
+                        self.img = UIImage(named: "happiestman")
+                        self.performSegueWithIdentifier("addReminder", sender: self)
             print("camera inaccessible")
         }
         tableView.reloadData()
@@ -130,11 +130,15 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
         cell.cellTime.text = reminder.doot!.convertToString()
         //cell.cellDescription.text = reminder.reminderDescription
         cell.backgroundImage.image = imer
-        cell.rightButtons = [MGSwipeButton(title: "Delete", backgroundColor: UIColor.redColor(), callback: {
+        cell.rightButtons = [MGSwipeButton(title: "", icon: UIImage(named: "Icon-61.png"), backgroundColor: UIColor(netHex: 0xe74c3c), callback: {
             (sender: MGSwipeTableCell!) -> Bool in
             
             RealmHelper.deleteReminder(self.reminders[indexPath.row])
             self.reminders = RealmHelper.retrieveReminders()
+            return true
+        }), MGSwipeButton(title: "", icon: UIImage(named:"Icon-60.png"), backgroundColor: UIColor(netHex: 0x2ecc71), callback: {
+            (sender: MGSwipeTableCell!) -> Bool in
+            self.performSegueWithIdentifier("ViewReminder", sender: self)
             return true
         })]
         cell.rightSwipeSettings.transition = MGSwipeTransition.Rotate3D
@@ -177,12 +181,21 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
         if let identifier = segue.identifier {
             //what to execute when identifier = cancel
             if identifier == "cameraToEdit" {
-                print("+ button tapped")
+                print("cell tapped")
                 let makeReminderViewController = segue.destinationViewController as! MakeReminderViewController
                 makeReminderViewController.img = img
                 makeReminderViewController.dateNSFormat = date
                 makeReminderViewController.reminder = self.selectedRecminder
                 
+            }else if identifier == "ViewReminder"{
+                let viewViewController = segue.destinationViewController as! LookAtViewController
+                viewViewController.img = img
+            }else if identifier == "addReminder"{
+                let makeReminderViewController = segue.destinationViewController as! MakeReminderViewController
+                makeReminderViewController.img = img
+                makeReminderViewController.dateNSFormat = date
+              //  makeReminderViewController.reminder = Reminder()
+
             }
         }
     }
@@ -231,4 +244,18 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
         img = drawedImage
     }
 
+}
+
+extension UIColor {
+    convenience init(red: Int, green: Int, blue: Int) {
+        assert(red >= 0 && red <= 255, "Invalid red component")
+        assert(green >= 0 && green <= 255, "Invalid green component")
+        assert(blue >= 0 && blue <= 255, "Invalid blue component")
+        
+        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+    }
+    
+    convenience init(netHex:Int) {
+        self.init(red:(netHex >> 16) & 0xff, green:(netHex >> 8) & 0xff, blue:netHex & 0xff)
+    }
 }

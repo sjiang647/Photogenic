@@ -113,6 +113,8 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
         let strDate = dateFormatter.stringFromDate(datePicker.date)
         time.text = strDate
         datePicker.setValue(0.8, forKeyPath: "alpha")
+        UINavigationBar.appearance().barTintColor = UIColor(netHex: 0x34495e)
+        
     }
     
     
@@ -163,17 +165,18 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
             let qualityOfServiceClass = QOS_CLASS_BACKGROUND
             let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
             if let reminder = reminder {
-                
+                let reminderUUID = reminder.uuid
                 dispatch_async(backgroundQueue, {
                     let realm = try! Realm()
                     
                     try! realm.write(){
-                        reminder.name = newReminder.name
+                        let reminderFromRealm = realm.objectForPrimaryKey(Reminder.self, key: reminderUUID)!
+                        reminderFromRealm.name = newReminder.name
                         //            reminderToBeUpdated.reminderDescription = newReminder.reminderDescription
-                        reminder.time = newReminder.time
-                        reminder.img = newReminder.img
+                        reminderFromRealm.time = newReminder.time
+                        reminderFromRealm.img = newReminder.img
                         //  reminderToBeUpdated.tiem = newReminder.tiem
-                        reminder.doot = newReminder.doot
+                        reminderFromRealm.doot = newReminder.doot
                     }
                     
                 })
