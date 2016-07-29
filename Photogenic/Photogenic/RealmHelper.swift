@@ -19,6 +19,7 @@ class RealmHelper {
     static var realm: Realm = try! Realm()
     
     static func addReminder(reminder: Reminder){
+        
         try! realm.write(){
             realm.add(reminder)
         }
@@ -33,7 +34,7 @@ class RealmHelper {
     static func updateReminder(reminderToBeUpdated: Reminder, newReminder: Reminder){
         try! realm.write(){
             reminderToBeUpdated.name = newReminder.name
-            reminderToBeUpdated.reminderDescription = newReminder.reminderDescription
+//            reminderToBeUpdated.reminderDescription = newReminder.reminderDescription
             reminderToBeUpdated.time = newReminder.time
             reminderToBeUpdated.img = newReminder.img
           //  reminderToBeUpdated.tiem = newReminder.tiem

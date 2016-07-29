@@ -14,7 +14,7 @@ class Reminder: Object{
     dynamic var doot: NSDate?
     dynamic var time = ""
     dynamic var name = ""
-    dynamic var reminderDescription = ""
+    //dynamic var reminderDescription = ""
     dynamic var img: NSData?
     //dynamic var notification: UILocalNotification?
     

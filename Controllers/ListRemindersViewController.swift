@@ -5,7 +5,7 @@
 //  Created by Steve Jiang on 7/12/16.
 //  Copyright © 2016 Makeschool. All rights reserved.
 //
-
+import CoreImage
 import Foundation
 import UIKit
 import RealmSwift
@@ -14,6 +14,9 @@ import MGSwipeTableCell
 class ListRemindersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate,MGSwipeTableCellDelegate{
     let imagePicker: UIImagePickerController! = UIImagePickerController()
     @IBOutlet weak var tableView: UITableView!
+    var img: UIImage?
+    var date: NSDate?
+    var selectedRecminder:Reminder?
     var reminders: Results<Reminder>! {
         didSet {
             tableView.reloadData()
@@ -40,11 +43,6 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
         
     }
     
-    
-    var img: UIImage?
-    var date: NSDate?
-    var selectedRecminder:Reminder?
-    
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         print("Got an image")
         if let pickedImage:UIImage = (info[UIImagePickerControllerOriginalImage]) as? UIImage {
@@ -70,10 +68,10 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
     override func viewDidLoad(){
         super.viewDidLoad()
         //swipe recognition
-        let recognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "swipeRight:")
+//        let recognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "swipeRight:")
         tableView.delegate = self
-        recognizer.direction = .Right
-        self.view .addGestureRecognizer(recognizer)
+//        recognizer.direction = .Right
+//        self.view .addGestureRecognizer(recognizer)
         //get reminders
         RealmHelper.notificationToken = RealmHelper.realm.addNotificationBlock { [unowned self] note, realm in
             dispatch_async(dispatch_get_main_queue(), {
@@ -103,10 +101,13 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
         tableView.reloadData()
     }
     //swipe recognition
-    func swipeRight(recognizer : UISwipeGestureRecognizer) {
-        self.performSegueWithIdentifier("backToStartingView", sender: self)
-    }
+//    func swipeRight(recognizer : UISwipeGestureRecognizer) {
+//        self.performSegueWithIdentifier("backToStartingView", sender: self)
+//    }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
     
     //number of rows in table view
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -127,7 +128,7 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
         let imer = UIImage(data: reminder.img!)
         
         cell.cellTime.text = reminder.doot!.convertToString()
-        cell.cellDescription.text = reminder.reminderDescription
+        //cell.cellDescription.text = reminder.reminderDescription
         cell.backgroundImage.image = imer
         cell.rightButtons = [MGSwipeButton(title: "Delete", backgroundColor: UIColor.redColor(), callback: {
             (sender: MGSwipeTableCell!) -> Bool in
@@ -189,5 +190,45 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
         //unwind segue for makeReminder to call to unwind back to list reminder
     }
     
-    
+    func addEmoji(){
+        let ciImage  = CIImage(CGImage:img!.CGImage!)
+        let detector = CIDetector(
+            ofType: CIDetectorTypeFace,
+            context: nil,
+            options: [ CIDetectorAccuracy: CIDetectorAccuracyHigh ]
+        )
+        let faces = detector.featuresInImage(
+            ciImage,
+            options: [ CIDetectorSmile: true ]
+            ) as! [CIFaceFeature]
+        UIGraphicsBeginImageContext(img!.size)
+        img!.drawInRect(CGRectMake(0,0,img!.size.width,img!.size.height))
+        
+        for face in faces {
+            print(face.bounds)
+            
+            //context
+            let drawCtxt = UIGraphicsGetCurrentContext()
+            var rect = face.bounds
+            
+            rect.origin.y = img!.size.height - rect.origin.y - rect.size.height
+            var calloutView:UIImage!
+            
+            if face.hasSmile {
+                calloutView = UIImage(named:"smileyEmoji.jpg")
+            } else {
+                calloutView = UIImage(named:"sad.png")
+            }
+            
+            
+            calloutView!.drawInRect(rect)
+            
+            
+            CGContextStrokeRect(drawCtxt,rect)
+        }
+        let drawedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        img = drawedImage
+    }
+
 }

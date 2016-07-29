@@ -21,7 +21,8 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
         }else{
             nameTextField.text = "reminder at \(pickerDate)"
         }
-        differenceBetweenDates = NSDate().timeIntervalSinceDate(pickerDate)
+        let currentDate = NSDate()
+        differenceBetweenDates = datePicker.date.timeIntervalSinceDate(currentDate)
         let localNotification = UILocalNotification()
         localNotification.fireDate = pickerDate
         //        localNotification.applicationIconBadgeNumber += 1
@@ -30,14 +31,16 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
         NSNotificationCenter.defaultCenter().postNotificationName("reloadData", object: self)
         BSForegroundNotification.systemSoundID = 1001
-        let notification = BSForegroundNotification(userInfo: userInfoForCategory("ONE_BUTTON"))
+        let notif = BSForegroundNotification(userInfo: userInfoForCategory("ONE_BUTTON"))
         
-        
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(differenceBetweenDates! * Double(NSEC_PER_SEC))), dispatch_get_main_queue()){ () -> Void in
-            notification.presentNotification()
+        let triggerDate = Int64(differenceBetweenDates! * Double(NSEC_PER_SEC))
+        print(triggerDate)
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
+            triggerDate)
+        , dispatch_get_main_queue()){ () -> Void in
+            notif.presentNotification()
         }
-        notification.delegate = self
+        notif.delegate = self
         
         print("reminder is nil")
         self.performSegueWithIdentifier("done", sender: self)
@@ -49,15 +52,16 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
         self.performSegueWithIdentifier("cancel", sender: self)
     }
     //var appDelegate: AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
-    @IBOutlet weak var descriptionLabel: UILabel!
+    
+    
     @IBOutlet weak var backgroundImage: UIImageView!
     var reminder: Reminder?
     @IBOutlet weak var time: UILabel!
     var keyboardOffset = 80.0
     @IBOutlet weak var tapGesture: UITapGestureRecognizer!
     @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var shareWithTextField: UITextField!
-    @IBOutlet weak var reminderDescription: UITextView!
+    //@IBOutlet weak var shareWithTextField: UITextField!
+    //@IBOutlet weak var reminderDescription: UITextView!
     @IBOutlet weak var datePicker: UIDatePicker!
     
     var differenceBetweenDates: NSTimeInterval?
@@ -94,13 +98,13 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
         self.view.addGestureRecognizer(tapGesture)
         //label colors
         nameTextField.backgroundColor = UIColor.clearColor()
-        shareWithTextField.backgroundColor = UIColor.clearColor()
-        reminderDescription.backgroundColor = UIColor.clearColor()
+        //        shareWithTextField.backgroundColor = UIColor.clearColor()
+        //        reminderDescription.backgroundColor = UIColor.clearColor()
         datePicker.backgroundColor = UIColor.clearColor()
-        self.reminderDescription.layer.borderColor = UIColor.blackColor().CGColor
-        self.reminderDescription.layer.borderWidth = 1.0
+        //        self.reminderDescription.layer.borderColor = UIColor.blackColor().CGColor
+        //        self.reminderDescription.layer.borderWidth = 1.0
         
-        differenceBetweenDates = 310
+        differenceBetweenDates = 310.0
         let dateFormatter = NSDateFormatter()
         
         dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
@@ -108,13 +112,10 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
         
         let strDate = dateFormatter.stringFromDate(datePicker.date)
         time.text = strDate
-        datePicker.setValue(UIColor.whiteColor(), forKeyPath: "textColor")
         datePicker.setValue(0.8, forKeyPath: "alpha")
     }
     
-    func textViewDidBeginEditing(textView: UITextView) {
-        self.descriptionLabel.hidden = true
-    }
+    
     
     //    func textViewDidChange(textView: UITextView) {
     //        self.descriptionLabel.hidden = reminderDescription.text.characters.count > 0
@@ -136,8 +137,9 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
         time.text = strDate
         dateStrFormat = strDate
         dateNSFormat = datePicker.date
-        AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
-        
+        if dateNSFormat!.compare(NSDate()) == NSComparisonResult.OrderedDescending{
+            AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+        }
         //  dane = datePicker.date
     }
     
@@ -152,18 +154,40 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
             // if note exists, update title and content
             let newReminder = Reminder()
             newReminder.name = nameTextField.text ?? "Untitled"
-            newReminder.reminderDescription = reminderDescription.text ?? "No Description.."
+            //            newReminder.reminderDescription = reminderDescription.text ?? "No Description.."
             newReminder.time = dateStrFormat
             newReminder.doot = dateNSFormat
             print(newReminder.doot)
             print(newReminder.time)
             newReminder.img = UIImagePNGRepresentation(self.img!)
+            let qualityOfServiceClass = QOS_CLASS_BACKGROUND
+            let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
             if let reminder = reminder {
-                RealmHelper.updateReminder(reminder, newReminder: newReminder)
+                
+                dispatch_async(backgroundQueue, {
+                    let realm = try! Realm()
+                    
+                    try! realm.write(){
+                        reminder.name = newReminder.name
+                        //            reminderToBeUpdated.reminderDescription = newReminder.reminderDescription
+                        reminder.time = newReminder.time
+                        reminder.img = newReminder.img
+                        //  reminderToBeUpdated.tiem = newReminder.tiem
+                        reminder.doot = newReminder.doot
+                    }
+                    
+                })
+                
             } else {
                 // if note does not exist, create new note
                 print("Done button tapped")
-                RealmHelper.addReminder(newReminder)
+                dispatch_async(backgroundQueue, {
+                    let realm = try! Realm()
+                    try! realm.write(){
+                        realm.add(newReminder)
+                    }
+                })
+                
                 
             }
             
@@ -212,10 +236,10 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
         if let reminder = reminder {
             // 2
             nameTextField.text = reminder.name
-            reminderDescription.text = reminder.reminderDescription
+            //            reminderDescription.text = reminder.reminderDescription
             time.text = reminder.time
             //datePicker.date = dane!
-            shareWithTextField.text = ""
+            //            shareWithTextField.text = ""
             datePicker.setDate(dateNSFormat!, animated: true)
             datePicker.date = dateNSFormat!
             
@@ -223,20 +247,15 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
             // 3
             
             nameTextField.text = ""
-            reminderDescription.text = ""
+            //            reminderDescription.text = ""
             time.text = ""
             // datePicker.date = dane!
             //datePicker.setDate(dateNSFormat!, animated: true)
-            shareWithTextField.text = ""
+            //            shareWithTextField.text = ""
             dateNSFormat = datePicker.date
         }
         
     }
-    
-    
-    
-    
-    
     
 }
 extension NSDate {
