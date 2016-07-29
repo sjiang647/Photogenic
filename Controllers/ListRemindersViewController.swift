@@ -5,7 +5,7 @@
 //  Created by Steve Jiang on 7/12/16.
 //  Copyright © 2016 Makeschool. All rights reserved.
 //
-import CoreImage
+import CoreGraphics
 import Foundation
 import UIKit
 import RealmSwift
@@ -47,6 +47,18 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
         print("Got an image")
         if let pickedImage:UIImage = (info[UIImagePickerControllerOriginalImage]) as? UIImage {
             //            let selectorToCall = Selector("imageWasSavedSuccessfully:didFinishSavingWithError:context:")
+            if pickedImage.size.height > pickedImage.size.width {
+                print("portrait")
+                var fixedImage = pickedImage.fixedOrientation()
+                img = fixedImage
+                
+            }
+            else {
+                print("landscape")
+                var fixedImage = pickedImage.fixedOrientation()
+                img = fixedImage
+            }
+
             img = pickedImage
             //            UIImageWriteToSavedPhotosAlbum(pickedImage, self, selectorToCall, nil)
         }
@@ -67,7 +79,15 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
     
     override func viewDidLoad(){
         super.viewDidLoad()
+        navigationController?.navigationBar.tintColor = UIColor(netHex: 0xecf0f1)
+//        navigationController?.navigationBar.barTintColor = UIColor(netHex: 0x3498db)
+        UINavigationBar.appearance().barTintColor = UIColor(netHex: 0x3498db)
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor(netHex: 0xecf0f1)]
+        navigationController?.navigationBar.translucent = false
+        tableView.backgroundColor = UIColor(netHex: 0xecf0f1)
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         //swipe recognition
+        
 //        let recognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "swipeRight:")
         tableView.delegate = self
 //        recognizer.direction = .Right
@@ -136,9 +156,18 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
             RealmHelper.deleteReminder(self.reminders[indexPath.row])
             self.reminders = RealmHelper.retrieveReminders()
             return true
-        }), MGSwipeButton(title: "", icon: UIImage(named:"Icon-60.png"), backgroundColor: UIColor(netHex: 0x2ecc71), callback: {
+        }), MGSwipeButton(title: "", icon: UIImage(named:"Icon-62.png"), backgroundColor: UIColor(netHex: 0x2ecc71), callback: {
             (sender: MGSwipeTableCell!) -> Bool in
-            self.performSegueWithIdentifier("ViewReminder", sender: self)
+            
+            self.img = cell.backgroundImage.image
+            
+            self.date = String.backToDate(cell.cellTime.text!)
+            self.selectedRecminder = self.reminders[indexPath.row]
+            print(indexPath.row)
+            print(self.selectedRecminder?.name)
+            self.performSegueWithIdentifier("cameraToEdit", sender: self)
+
+            
             return true
         })]
         cell.rightSwipeSettings.transition = MGSwipeTransition.Rotate3D
@@ -156,13 +185,15 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! ListRemindersTableViewCell
         self.img = cell.backgroundImage.image
-        
-        self.date = String.backToDate(cell.cellTime.text!)
-        self.selectedRecminder = reminders[indexPath.row]
-        print(indexPath.row)
-        print(self.selectedRecminder?.name)
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        self.performSegueWithIdentifier("cameraToEdit", sender: self)
+//        
+//        self.date = String.backToDate(cell.cellTime.text!)
+//        self.selectedRecminder = reminders[indexPath.row]
+//        print(indexPath.row)
+//        print(self.selectedRecminder?.name)
+//        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+//        self.performSegueWithIdentifier("cameraToEdit", sender: self)
+         self.performSegueWithIdentifier("ViewReminder", sender: self)
+
     }
     //    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     //        if editingStyle == .Delete {
@@ -257,5 +288,62 @@ extension UIColor {
     
     convenience init(netHex:Int) {
         self.init(red:(netHex >> 16) & 0xff, green:(netHex >> 8) & 0xff, blue:netHex & 0xff)
+    }
+}
+extension UIImage {
+    
+    func fixedOrientation() -> UIImage {
+        
+        if imageOrientation == UIImageOrientation.Up {
+            return self
+        }
+        
+        var transform: CGAffineTransform = CGAffineTransformIdentity
+        
+        switch imageOrientation {
+        case UIImageOrientation.Down, UIImageOrientation.DownMirrored:
+            transform = CGAffineTransformTranslate(transform, size.width, size.height)
+            transform = CGAffineTransformRotate(transform, CGFloat(M_PI))
+            break
+        case UIImageOrientation.Left, UIImageOrientation.LeftMirrored:
+            transform = CGAffineTransformTranslate(transform, size.width, 0)
+            transform = CGAffineTransformRotate(transform, CGFloat(M_PI_2))
+            break
+        case UIImageOrientation.Right, UIImageOrientation.RightMirrored:
+            transform = CGAffineTransformTranslate(transform, 0, size.height)
+            transform = CGAffineTransformRotate(transform, CGFloat(-M_PI_2))
+            break
+        case UIImageOrientation.Up, UIImageOrientation.UpMirrored:
+            break
+        }
+        
+        switch imageOrientation {
+        case UIImageOrientation.UpMirrored, UIImageOrientation.DownMirrored:
+            CGAffineTransformTranslate(transform, size.width, 0)
+            CGAffineTransformScale(transform, -1, 1)
+            break
+        case UIImageOrientation.LeftMirrored, UIImageOrientation.RightMirrored:
+            CGAffineTransformTranslate(transform, size.height, 0)
+            CGAffineTransformScale(transform, -1, 1)
+        case UIImageOrientation.Up, UIImageOrientation.Down, UIImageOrientation.Left, UIImageOrientation.Right:
+            break
+        }
+        
+        let ctx: CGContextRef = CGBitmapContextCreate(nil, Int(size.width), Int(size.height), CGImageGetBitsPerComponent(CGImage), 0, CGImageGetColorSpace(CGImage), CGImageAlphaInfo.PremultipliedLast.rawValue)!
+        
+        CGContextConcatCTM(ctx, transform)
+        
+        switch imageOrientation {
+        case UIImageOrientation.Left, UIImageOrientation.LeftMirrored, UIImageOrientation.Right, UIImageOrientation.RightMirrored:
+            CGContextDrawImage(ctx, CGRectMake(0, 0, size.height, size.width), CGImage)
+            break
+        default:
+            CGContextDrawImage(ctx, CGRectMake(0, 0, size.width, size.height), CGImage)
+            break
+        }
+        
+        let cgImage: CGImageRef = CGBitmapContextCreateImage(ctx)!
+        
+        return UIImage(CGImage: cgImage)
     }
 }

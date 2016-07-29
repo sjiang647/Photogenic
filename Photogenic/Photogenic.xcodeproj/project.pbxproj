@@ -19,6 +19,8 @@
 		CF2C04D31D397B14001A1C9A /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C04D21D397B14001A1C9A /* RealmHelper.swift */; };
 		CF46C1221D4A887C001C2AE9 /* ClipTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF46C1211D4A887C001C2AE9 /* ClipTableViewCell.swift */; };
 		CF46C1281D4BC6E4001C2AE9 /* LookAtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF46C1271D4BC6E4001C2AE9 /* LookAtViewController.swift */; };
+		CF68986C1D4C0787000AA996 /* whiteGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = CF68986B1D4C0787000AA996 /* whiteGradient.png */; };
+		CF68986E1D4C08AF000AA996 /* whiteGradient2.png in Resources */ = {isa = PBXBuildFile; fileRef = CF68986D1D4C08AF000AA996 /* whiteGradient2.png */; };
 		CF6C04DB1D47CE9700C2A030 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF6C04DA1D47CE9700C2A030 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +41,8 @@
 		CF2C04D21D397B14001A1C9A /* RealmHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
 		CF46C1211D4A887C001C2AE9 /* ClipTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipTableViewCell.swift; sourceTree = "<group>"; };
 		CF46C1271D4BC6E4001C2AE9 /* LookAtViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LookAtViewController.swift; sourceTree = "<group>"; };
+		CF68986B1D4C0787000AA996 /* whiteGradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = whiteGradient.png; path = ../../../../../Desktop/whiteGradient.png; sourceTree = "<group>"; };
+		CF68986D1D4C08AF000AA996 /* whiteGradient2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = whiteGradient2.png; path = ../../../../../Desktop/whiteGradient2.png; sourceTree = "<group>"; };
 		CF6C04DA1D47CE9700C2A030 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -100,6 +104,8 @@
 				CF2695C61D343D2900C77D5E /* AppDelegate.swift */,
 				CF2695CA1D343D2900C77D5E /* Main.storyboard */,
 				CF2695CD1D343D2900C77D5E /* Assets.xcassets */,
+				CF68986B1D4C0787000AA996 /* whiteGradient.png */,
+				CF68986D1D4C08AF000AA996 /* whiteGradient2.png */,
 				CF2695CF1D343D2900C77D5E /* LaunchScreen.storyboard */,
 				CF2695D21D343D2900C77D5E /* Info.plist */,
 				CF2C04D21D397B14001A1C9A /* RealmHelper.swift */,
@@ -202,6 +208,8 @@
 				CF2695D11D343D2900C77D5E /* LaunchScreen.storyboard in Resources */,
 				CF2695CE1D343D2900C77D5E /* Assets.xcassets in Resources */,
 				CF2695CC1D343D2900C77D5E /* Main.storyboard in Resources */,
+				CF68986E1D4C08AF000AA996 /* whiteGradient2.png in Resources */,
+				CF68986C1D4C0787000AA996 /* whiteGradient.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

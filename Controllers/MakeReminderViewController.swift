@@ -113,7 +113,7 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
         let strDate = dateFormatter.stringFromDate(datePicker.date)
         time.text = strDate
         datePicker.setValue(0.8, forKeyPath: "alpha")
-        UINavigationBar.appearance().barTintColor = UIColor(netHex: 0x34495e)
+//        UINavigationBar.appearance().barTintColor = UIColor(netHex: 0x34495e)
         
     }
     
@@ -131,7 +131,12 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
     //Changes the label for the date whenever the time scroll wheel changes
     func datePickerChanged(datePicker:UIDatePicker) {
         let dateFormatter = NSDateFormatter()
-        
+//        if NSDate().compare(dateNSFormat!) == NSComparisonResult.OrderedDescending{
+//            AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+//        }
+        if datePicker.date.compare(datePicker.minimumDate!) == .OrderedAscending {
+            AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+        }
         dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
         dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
         
@@ -139,9 +144,7 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
         time.text = strDate
         dateStrFormat = strDate
         dateNSFormat = datePicker.date
-        if dateNSFormat!.compare(NSDate()) == NSComparisonResult.OrderedDescending{
-            AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
-        }
+        
         //  dane = datePicker.date
     }
     
