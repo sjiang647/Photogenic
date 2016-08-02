@@ -21,6 +21,9 @@
 		CF46C1281D4BC6E4001C2AE9 /* LookAtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF46C1271D4BC6E4001C2AE9 /* LookAtViewController.swift */; };
 		CF68986C1D4C0787000AA996 /* whiteGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = CF68986B1D4C0787000AA996 /* whiteGradient.png */; };
 		CF68986E1D4C08AF000AA996 /* whiteGradient2.png in Resources */ = {isa = PBXBuildFile; fileRef = CF68986D1D4C08AF000AA996 /* whiteGradient2.png */; };
+		CF6898701D4FB3B1000AA996 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF68986F1D4FB3B1000AA996 /* MapKit.framework */; };
+		CF6898721D4FBE50000AA996 /* AnnotationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6898711D4FBE50000AA996 /* AnnotationsViewController.swift */; };
+		CF6898741D4FC850000AA996 /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6898731D4FC850000AA996 /* Annotation.swift */; };
 		CF6C04DB1D47CE9700C2A030 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF6C04DA1D47CE9700C2A030 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +46,9 @@
 		CF46C1271D4BC6E4001C2AE9 /* LookAtViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LookAtViewController.swift; sourceTree = "<group>"; };
 		CF68986B1D4C0787000AA996 /* whiteGradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = whiteGradient.png; path = ../../../../../Desktop/whiteGradient.png; sourceTree = "<group>"; };
 		CF68986D1D4C08AF000AA996 /* whiteGradient2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = whiteGradient2.png; path = ../../../../../Desktop/whiteGradient2.png; sourceTree = "<group>"; };
+		CF68986F1D4FB3B1000AA996 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		CF6898711D4FBE50000AA996 /* AnnotationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationsViewController.swift; sourceTree = "<group>"; };
+		CF6898731D4FC850000AA996 /* Annotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Annotation.swift; sourceTree = "<group>"; };
 		CF6C04DA1D47CE9700C2A030 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -51,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF6898701D4FB3B1000AA996 /* MapKit.framework in Frameworks */,
 				CF6C04DB1D47CE9700C2A030 /* AVFoundation.framework in Frameworks */,
 				94B945DA1ABC74F751152694 /* Pods_Photogenic.framework in Frameworks */,
 			);
@@ -71,6 +78,7 @@
 		62B769FA938B3D5E8C45F68A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CF68986F1D4FB3B1000AA996 /* MapKit.framework */,
 				CF6C04DA1D47CE9700C2A030 /* AVFoundation.framework */,
 				6F1AE4DADAA081610CFDF94C /* Pods_Photogenic.framework */,
 			);
@@ -117,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				CF1139641D38584100EC0104 /* Reminder.swift */,
+				CF6898731D4FC850000AA996 /* Annotation.swift */,
 			);
 			name = Models;
 			path = ../../Models;
@@ -128,6 +137,7 @@
 				CF2695E71D3564CA00C77D5E /* ListRemindersViewController.swift */,
 				CF2695E91D3564D400C77D5E /* MakeReminderViewController.swift */,
 				CF46C1271D4BC6E4001C2AE9 /* LookAtViewController.swift */,
+				CF6898711D4FBE50000AA996 /* AnnotationsViewController.swift */,
 			);
 			name = Controllers;
 			path = ../../Controllers;
@@ -271,8 +281,10 @@
 				CF2695EA1D3564D400C77D5E /* MakeReminderViewController.swift in Sources */,
 				CF2695C71D343D2900C77D5E /* AppDelegate.swift in Sources */,
 				CF2695E81D3564CA00C77D5E /* ListRemindersViewController.swift in Sources */,
+				CF6898721D4FBE50000AA996 /* AnnotationsViewController.swift in Sources */,
 				CF46C1221D4A887C001C2AE9 /* ClipTableViewCell.swift in Sources */,
 				CF2C04D31D397B14001A1C9A /* RealmHelper.swift in Sources */,
+				CF6898741D4FC850000AA996 /* Annotation.swift in Sources */,
 				CF2695EC1D3565B600C77D5E /* ListRemindersTableViewCell.swift in Sources */,
 				CF46C1281D4BC6E4001C2AE9 /* LookAtViewController.swift in Sources */,
 				CF1139651D38584100EC0104 /* Reminder.swift in Sources */,

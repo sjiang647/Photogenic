@@ -28,6 +28,7 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
         //        localNotification.applicationIconBadgeNumber += 1
         localNotification.alertBody = "Don't forget about \(nameTextField.text!)!!!"
         localNotification.soundName = UILocalNotificationDefaultSoundName
+        localNotification.category = ("BACKGROUND_NOTIF")
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
         NSNotificationCenter.defaultCenter().postNotificationName("reloadData", object: self)
         BSForegroundNotification.systemSoundID = 1001
@@ -262,7 +263,10 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
         }
         
     }
-    
+    @IBAction func unwindToMakeReminderViewController(segue: UIStoryboardSegue) {
+        //unwind segue for makeReminder to call to unwind back to list reminder
+    }
+
 }
 extension NSDate {
     func convertToString() -> String {

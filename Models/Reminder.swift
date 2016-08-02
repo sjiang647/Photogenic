@@ -22,4 +22,6 @@ class Reminder: Object{
         return "uuid"
     }
     
+    var annotations = List<Annotation>()
+  
 }
