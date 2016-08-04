@@ -11,9 +11,10 @@ import UIKit
 import Parse
 import MGSwipeTableCell
 class ClipTableViewCell: MGSwipeTableCell{
+    var annotation: Annotation?
     
+    @IBOutlet weak var number: UILabel!
     
-    @IBOutlet weak var clipImage: UIImageView!
     
     @IBOutlet weak var label: UILabel!
 }

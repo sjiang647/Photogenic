@@ -11,7 +11,10 @@ import UIKit
 import RealmSwift
 import BSForegroundNotification
 import AudioToolbox
+import MGSwipeTableCell
 class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegroundNotificationDelegate{
+    @IBOutlet weak var tableView: UITableView!
+    var sentAnnotation: Annotation?
     
     @IBAction func doneTapped(sender: UIBarButtonItem) {
         print("inside donetapped")
@@ -66,7 +69,12 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
     @IBOutlet weak var datePicker: UIDatePicker!
     
     var differenceBetweenDates: NSTimeInterval?
-    
+    var annotations: List<Annotation>! {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+
     var dateNSFormat: NSDate?
     var dateStrFormat = ""
     var img : UIImage?
@@ -151,12 +159,13 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
     
     //prepareForSegue for unwind back into listReminders
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let listRemindersViewController = segue.destinationViewController as! ListRemindersViewController
-        print("prepareFor")
-        
         
         
         if segue.identifier == "done" {
+            let listRemindersViewController = segue.destinationViewController as! ListRemindersViewController
+            print("prepareFor")
+            
+
             // if note exists, update title and content
             let newReminder = Reminder()
             newReminder.name = nameTextField.text ?? "Untitled"
@@ -201,33 +210,20 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
             
         }else if segue.identifier == "cancel"{
             print("cancelled new Post")
+        }else if segue.identifier == "dispAnnotation"{
+            let annotationsViewController = segue.destinationViewController as! AnnotationsViewController
+            annotationsViewController.img = img
+            annotationsViewController.getAnnotation = sentAnnotation
+        }else if segue.identifier == "addAnnotation"{
+            let annotationsViewController = segue.destinationViewController as! AnnotationsViewController
+            annotationsViewController.img = img
+            annotationsViewController.annotations = annotations
+            
         }
-        //        listRemindersViewController.reminders = RealmHelper.retrieveReminders()
+        
     }
     
-    //        if let identifier = segue.identifier {
-    //            if identifier == "Cancel" {
-    //                print("Cancel button tapped")
-    //
-    //            } else if identifier == "Done" {
-    //                if let reminder = reminder{
-    //                    reminder.name = nameTextField.text ?? "Untitled"
-    //                    reminder.reminderDescription = reminderDescription.text ?? "No Description.."
-    //                    reminder.time = time.text!
-    //                    listRemindersViewController.tableView.reloadData()
-    //                }else{
-    //
-    //                    print("Done button tapped")
-    //                    let reminder = Reminder()
-    //                    reminder.name = name.text ?? "Untitled"
-    //                    reminder.reminderDescription = reminderDescription.text ?? "No Description.."
-    //                    reminder.time = time.text!
-    //                    listRemindersViewController.reminders.append(reminder)
-    //                }
-    //            }
-    //        }
-    //     }
-    
+        
     
     @IBAction func dismissKeyboard(sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
@@ -266,6 +262,63 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
     @IBAction func unwindToMakeReminderViewController(segue: UIStoryboardSegue) {
         //unwind segue for makeReminder to call to unwind back to list reminder
     }
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return annotations.count
+    }
+    // var imers: UIImage?
+    
+    
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("clipTableViewCell", forIndexPath: indexPath) as! ClipTableViewCell
+        //display what is on the table view
+        let row = indexPath.row
+        let annotation = annotations[row]
+        //setters
+        cell.label.text = annotation.text
+        //imer is converting the img NSData from the reminder model to a UIImage to display in the background
+        
+        
+            cell.rightButtons = [MGSwipeButton(title: "", icon: UIImage(named: "Icon-61.png"), backgroundColor: UIColor(netHex: 0xe74c3c), callback: {
+            (sender: MGSwipeTableCell!) -> Bool in
+//            
+//            RealmHelper.deleteReminder(self.reminders[indexPath.row])
+//            self.reminders = RealmHelper.retrieveReminders()
+           return true
+        })]
+        cell.rightSwipeSettings.transition = MGSwipeTransition.Rotate3D
+        
+        return cell
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! ClipTableViewCell
+        self.sentAnnotation = cell.annotation
+        //
+        //        self.date = String.backToDate(cell.cellTime.text!)
+        //        self.selectedRecminder = reminders[indexPath.row]
+        //        print(indexPath.row)
+        //        print(self.selectedRecminder?.name)
+        //        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        //        self.performSegueWithIdentifier("cameraToEdit", sender: self)
+        self.performSegueWithIdentifier("dispAnnotation", sender: self)
+        
+    }
+
+    
+    @IBAction func addAnnotation(sender: AnyObject) {
+        self.performSegueWithIdentifier("addAnnotation", sender: self)
+    }
+    
 
 }
 extension NSDate {
