@@ -22,9 +22,22 @@ class AnnotationsViewController: UIViewController,  UIGestureRecognizerDelegate{
     @IBOutlet weak var imerge: UIImageView!
     @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
     //   let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:Selector("handleTap:"))
-    override func viewDidAppear(animated: Bool){
-        super.viewDidAppear(animated)
-        if reminder!.annotations.count != 0 {
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        print("inside viewWillAppear Annotations")
+//        print(self.reminder)
+//        let stringu = "{72.5, 218}"
+//        let point = CGPointFromString(stringu)
+//        let framer = CGRectMake(point.x, point.y, 150, 30)
+//        let viee = UIView(frame: framer)
+//        viee.backgroundColor = UIColor.blackColor()
+//        self.view.addSubview(viee)
+        print(self.reminder?.annotations)
+        print(reminder!.annotations.count)
+        if reminder!.annotations.count == 0 {
+            reminder!.annotations = List<Annotation>()
+            
+        } else {
             for ann in reminder!.annotations{
                 let pt = CGPointFromString(ann.coordStringFormat!)
                 let frame = CGRectMake(pt.x, pt.y, 150, 30)
@@ -40,10 +53,13 @@ class AnnotationsViewController: UIViewController,  UIGestureRecognizerDelegate{
                 DynamicView.addSubview(text)
                 self.view.addSubview(DynamicView)
             }
-        } else {
-            reminder!.annotations = List<Annotation>()
+            
         }
         
+    }
+    override func viewDidAppear(animated: Bool){
+        super.viewDidAppear(animated)
+        print("viewdidappearannotations")
     }
     var arrayOfDynamicViews :[UIView] = []
     override func viewDidLoad(){
@@ -83,7 +99,10 @@ class AnnotationsViewController: UIViewController,  UIGestureRecognizerDelegate{
             newAnnotation.coordStringFormat = NSStringFromCGPoint(point!)
             print("coordSet")
             print("textSet")
-            reminder!.annotations.append(newAnnotation)
+            let realm = try! Realm()
+            try! realm.write(){
+                reminder!.annotations.append(newAnnotation)
+            }
             print("added")
         }
     }
@@ -96,25 +115,25 @@ class AnnotationsViewController: UIViewController,  UIGestureRecognizerDelegate{
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let makeReminderViewController = segue.destinationViewController as! MakeReminderViewController
         if segue.identifier == "finished" {
-//            let newReminder = Reminder()
-//            newReminder.annotations = reminder!.annotations
-//            newReminder.img = reminder?.img
-//            newReminder.uuid = reminder!.uuid
-//            newReminder.doot = reminder?.doot
-//            newReminder.time = reminder!.time
-//            newReminder.name = reminder!.name
-//            
-//            
-//            let realm = try! Realm()
-//            try! realm.write(){
-//                reminder = newReminder
-//                //                reminder!.annotations = annotations
-//            }
-//            for anno in annotations {
-//                print(anno.text)
-//                print(anno.coordStringFormat)
-//            }
-            makeReminderViewController.reminder = reminder!
+            //            let newReminder = Reminder()
+            //            newReminder.annotations = reminder!.annotations
+            //            newReminder.img = reminder?.img
+            //            newReminder.uuid = reminder!.uuid
+            //            newReminder.doot = reminder?.doot
+            //            newReminder.time = reminder!.time
+            //            newReminder.name = reminder!.name
+            //
+            //
+            //            let realm = try! Realm()
+            //            try! realm.write(){
+            //                reminder = newReminder
+            //                //                reminder!.annotations = annotations
+            //            }
+            //            for anno in annotations {
+            //                print(anno.text)
+            //                print(anno.coordStringFormat)
+            //            }
+            makeReminderViewController.reminder = self.reminder!
         }
         else if segue.identifier == "cancelAnnotation"{
             

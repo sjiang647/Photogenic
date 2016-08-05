@@ -68,7 +68,6 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
         imagePicker.dismissViewControllerAnimated(true, completion: {
             // Anything you want to happen when the user saves an image
             print("imagePicker.dismiss")
-            let rec: Reminder
             self.performSegueWithIdentifier("addReminder", sender: self)
         })
     }
@@ -88,7 +87,7 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor(netHex: 0xecf0f1)]
         navigationController?.navigationBar.translucent = false
         tableView.backgroundColor = UIColor(netHex: 0xecf0f1)
-        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+//        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         //swipe recognition
         
 //        let recognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "swipeRight:")
@@ -144,13 +143,13 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
         let cell = tableView.dequeueReusableCellWithIdentifier("listRemindersTableViewCell", forIndexPath: indexPath) as! ListRemindersTableViewCell
         //display what is on the table view
         let row = indexPath.row
-        let reminder = reminders[row]
+//        let reminder = reminders[row]
         //setters
-        cell.cellName.text = reminder.name
+        cell.cellName.text = reminders[row].name
         //imer is converting the img NSData from the reminder model to a UIImage to display in the background
-        let imer = UIImage(data: reminder.img!)
+        let imer = UIImage(data: reminders[row].img!)
         
-        cell.cellTime.text = reminder.doot!.convertToString()
+        cell.cellTime.text = reminders[row].doot!.convertToString()
         //cell.cellDescription.text = reminder.reminderDescription
         cell.backgroundImage.image = imer
         cell.rightButtons = [MGSwipeButton(title: "", icon: UIImage(named: "Icon-61.png"), backgroundColor: UIColor(netHex: 0xe74c3c), callback: {
@@ -167,7 +166,8 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
             self.date = String.backToDate(cell.cellTime.text!)
             self.selectedRecminder = self.reminders[indexPath.row]
             print(indexPath.row)
-            print(self.selectedRecminder?.name)
+            print("listreminder")
+            print(self.selectedRecminder?.annotations.count)
             self.performSegueWithIdentifier("cameraToEdit", sender: self)
 
             
