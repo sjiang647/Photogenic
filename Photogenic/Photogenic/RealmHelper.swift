@@ -39,6 +39,7 @@ class RealmHelper {
             reminderToBeUpdated.img = newReminder.img
           //  reminderToBeUpdated.tiem = newReminder.tiem
             reminderToBeUpdated.doot = newReminder.doot
+            reminderToBeUpdated.annotations = newReminder.annotations
         }
     }
     

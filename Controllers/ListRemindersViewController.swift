@@ -42,6 +42,9 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
         }
         
     }
+    override func viewWillAppear(animated: Bool) {
+        self.selectedRecminder = nil
+    }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         print("Got an image")
