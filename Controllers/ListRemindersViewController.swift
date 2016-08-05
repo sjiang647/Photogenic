@@ -87,7 +87,7 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor(netHex: 0xecf0f1)]
         navigationController?.navigationBar.translucent = false
         tableView.backgroundColor = UIColor(netHex: 0xecf0f1)
-        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+//        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         //swipe recognition
         
 //        let recognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "swipeRight:")

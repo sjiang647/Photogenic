@@ -25,13 +25,13 @@ class AnnotationsViewController: UIViewController,  UIGestureRecognizerDelegate{
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         print("inside viewWillAppear Annotations")
-        print(self.reminder)
-        let stringu = "{72.5, 218}"
-        let point = CGPointFromString(stringu)
-        let framer = CGRectMake(point.x, point.y, 150, 30)
-        let viee = UIView(frame: framer)
-        viee.backgroundColor = UIColor.blackColor()
-        self.view.addSubview(viee)
+//        print(self.reminder)
+//        let stringu = "{72.5, 218}"
+//        let point = CGPointFromString(stringu)
+//        let framer = CGRectMake(point.x, point.y, 150, 30)
+//        let viee = UIView(frame: framer)
+//        viee.backgroundColor = UIColor.blackColor()
+//        self.view.addSubview(viee)
         print(self.reminder?.annotations)
         print(reminder!.annotations.count)
         if reminder!.annotations.count == 0 {
