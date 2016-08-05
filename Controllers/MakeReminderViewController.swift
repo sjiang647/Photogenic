@@ -19,11 +19,6 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
     @IBAction func doneTapped(sender: UIBarButtonItem) {
         print("inside donetapped")
         let pickerDate = self.datePicker.date
-        if let string = nameTextField.text{
-            nameTextField.text = nameTextField.text
-        }else{
-            nameTextField.text = "reminder at \(pickerDate)"
-        }
         let currentDate = NSDate()
         differenceBetweenDates = datePicker.date.timeIntervalSinceDate(currentDate)
         let localNotification = UILocalNotification()
@@ -172,6 +167,11 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
             print(newReminder.doot)
             print(newReminder.time)
             newReminder.img = UIImagePNGRepresentation(self.img!)
+            if reminder!.annotations.count == 0{
+            }else{
+                newReminder.annotations = self.reminder!.annotations
+                
+            }
             let qualityOfServiceClass = QOS_CLASS_BACKGROUND
             let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
             if let reminder = reminder {
@@ -258,7 +258,8 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        print("inside viewWillAppear")
+        print("inside makeReminder's viewWillAppear")
+        print(self.reminder?.annotations.count)
         
         // 1
         if let reminder = reminder {
