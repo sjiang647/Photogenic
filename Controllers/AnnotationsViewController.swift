@@ -14,21 +14,21 @@ import RealmSwift
 class AnnotationsViewController: UIViewController,  UIGestureRecognizerDelegate{
     var img: UIImage?
     var point: CGPoint?
-    var getAnnotation: Annotation?
-    var annotations: List<Annotation>?
+    var reminder: Reminder?
+    //    var getAnnotation: Annotation?
+    
+    var lastAnnotation : Annotation!
+    
     @IBOutlet weak var imerge: UIImageView!
     @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
-//   let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:Selector("handleTap:"))
-    
-    var arrayOfDynamicViews :[UIView] = []
-    
-    override func viewDidLoad(){
-        super.viewDidLoad()
-        if annotations != nil {
-            for ann in annotations!{
+    //   let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:Selector("handleTap:"))
+    override func viewDidAppear(animated: Bool){
+        super.viewDidAppear(animated)
+        if reminder!.annotations.count != 0 {
+            for ann in reminder!.annotations{
                 let pt = CGPointFromString(ann.coordStringFormat!)
                 let frame = CGRectMake(pt.x, pt.y, 150, 30)
-                var DynamicView=UIView(frame: frame)
+                let DynamicView=UIView(frame: frame)
                 DynamicView.backgroundColor=UIColor(netHex: 0x3498db)
                 DynamicView.layer.cornerRadius=10
                 let text = UITextField(frame: CGRectMake(0,0,150,30))
@@ -40,9 +40,14 @@ class AnnotationsViewController: UIViewController,  UIGestureRecognizerDelegate{
                 DynamicView.addSubview(text)
                 self.view.addSubview(DynamicView)
             }
-        }else{
-            annotations = List<Annotation>()
+        } else {
+            reminder!.annotations = List<Annotation>()
         }
+        
+    }
+    var arrayOfDynamicViews :[UIView] = []
+    override func viewDidLoad(){
+        super.viewDidLoad()
         imerge.image = img
         imerge.userInteractionEnabled = true
         tapGestureRecognizer.addTarget(self, action: #selector(handleTap))
@@ -52,64 +57,74 @@ class AnnotationsViewController: UIViewController,  UIGestureRecognizerDelegate{
             point = tapGestureRecognizer.locationInView(imerge)
             print("tapRecognized")
             print(NSStringFromCGPoint(point!))
-           
+            
             let frame = CGRectMake(point!.x, point!.y, 150, 30)
             
             let DynamicView=UIView(frame: frame)
             self.arrayOfDynamicViews.append(DynamicView)
             DynamicView.backgroundColor=UIColor(netHex: 0x3498db)
             DynamicView.layer.cornerRadius=10
-            let del = UIButton(frame: CGRectMake(point!.x+100, point!.y, 50, 30))
+            let del = IdentifiedButton(frame: CGRectMake(point!.x+100, point!.y, 50, 30))
             del.tag = self.arrayOfDynamicViews.count - 1
+            del.tag2 = reminder!.annotations.count
             del.backgroundColor = UIColor.whiteColor()
             del.setTitle("delete", forState: UIControlState.Normal)
-//            del.
+            //            del.
             del.addTarget(self, action: #selector(handleButton), forControlEvents: .TouchUpInside)
             let text = UITextField(frame: CGRectMake(0,0,100,30))
+            text.delegate = self
             text.becomeFirstResponder()
             DynamicView.addSubview(text)
             self.view.addSubview(DynamicView)
             self.view.addSubview(del)
-//            var newAnnotation: Annotation?
-//            newAnnotation!.coordStringFormat = NSStringFromCGPoint(point!)
-//            newAnnotation!.text = text.text
-//            annotations!.append(newAnnotation!)
+            let newAnnotation = Annotation()
+            lastAnnotation = newAnnotation
+            print("annotation instantiated")
+            newAnnotation.coordStringFormat = NSStringFromCGPoint(point!)
+            print("coordSet")
+            print("textSet")
+            reminder!.annotations.append(newAnnotation)
+            print("added")
         }
     }
-    func handleButton(sender: UIButton){
+    func handleButton(sender: IdentifiedButton){
         self.arrayOfDynamicViews[sender.tag].removeFromSuperview()
         sender.removeFromSuperview()
+        reminder!.annotations.removeAtIndex(sender.tag2)
     }
-    
-//    func touchesBegan(touches: Set<UITouch>, event: UIEvent) {
-//        
-//        super.touchesBegan(touches, withEvent: event)
-//        
-//        let touch: UITouch = touches.first!
-//        var location: CGPoint = touch.locationInView(touch.view!)
-//        let frame = CGRectMake(location.x, location.y, 50, 30)
-//        var DynamicView=UIView(frame: frame)
-//        DynamicView.backgroundColor=UIColor(netHex: 0x3498db)
-//        DynamicView.layer.cornerRadius=5
-//        let text = UITextField(frame: frame)
-//        text.textColor = UIColor.whiteColor()
-//        view.addSubview(text)
-//        
-//        self.view.addSubview(DynamicView)
-//        if (touch.view == imerge){
-//            print("touchesBegan | This is an ImageView")
-//        }else{
-//            print("touchesBegan | This is not an ImageView")
-//        }
-//    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let makeReminderViewController = segue.destinationViewController as! MakeReminderViewController
         if segue.identifier == "finished" {
-        makeReminderViewController.annotations = annotations!
+//            let newReminder = Reminder()
+//            newReminder.annotations = reminder!.annotations
+//            newReminder.img = reminder?.img
+//            newReminder.uuid = reminder!.uuid
+//            newReminder.doot = reminder?.doot
+//            newReminder.time = reminder!.time
+//            newReminder.name = reminder!.name
+//            
+//            
+//            let realm = try! Realm()
+//            try! realm.write(){
+//                reminder = newReminder
+//                //                reminder!.annotations = annotations
+//            }
+//            for anno in annotations {
+//                print(anno.text)
+//                print(anno.coordStringFormat)
+//            }
+            makeReminderViewController.reminder = reminder!
         }
         else if segue.identifier == "cancelAnnotation"{
             
         }
+    }
+}
+
+
+extension AnnotationsViewController : UITextFieldDelegate {
+    func textFieldDidEndEditing(textField: UITextField) {
+        self.lastAnnotation.text = textField.text
     }
 }

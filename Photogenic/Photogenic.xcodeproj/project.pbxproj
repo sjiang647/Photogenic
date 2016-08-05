@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		94B945DA1ABC74F751152694 /* Pods_Photogenic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F1AE4DADAA081610CFDF94C /* Pods_Photogenic.framework */; };
 		CF107E5D1D53AD030086F56A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF107E5B1D53AD030086F56A /* Main.storyboard */; };
+		CF107E5F1D5502F50086F56A /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF107E5E1D5502F50086F56A /* UIButton+Extension.swift */; };
 		CF1139651D38584100EC0104 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1139641D38584100EC0104 /* Reminder.swift */; };
 		CF2695C71D343D2900C77D5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2695C61D343D2900C77D5E /* AppDelegate.swift */; };
 		CF2695CE1D343D2900C77D5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF2695CD1D343D2900C77D5E /* Assets.xcassets */; };
@@ -32,6 +33,7 @@
 		6F1AE4DADAA081610CFDF94C /* Pods_Photogenic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Photogenic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E35A882B60D1AE2805186F4 /* Pods-Photogenic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Photogenic.release.xcconfig"; path = "Pods/Target Support Files/Pods-Photogenic/Pods-Photogenic.release.xcconfig"; sourceTree = "<group>"; };
 		CF107E5C1D53AD030086F56A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CF107E5E1D5502F50086F56A /* UIButton+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIButton+Extension.swift"; path = "../../Controllers/UIButton+Extension.swift"; sourceTree = "<group>"; };
 		CF1139641D38584100EC0104 /* Reminder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
 		CF2695C31D343D2900C77D5E /* Photogenic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Photogenic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF2695C61D343D2900C77D5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				CF2695D91D344A4B00C77D5E /* Controllers */,
 				CF2695D81D344A3B00C77D5E /* Models */,
 				CF2695C61D343D2900C77D5E /* AppDelegate.swift */,
+				CF107E5E1D5502F50086F56A /* UIButton+Extension.swift */,
 				CF2695CD1D343D2900C77D5E /* Assets.xcassets */,
 				CF68986B1D4C0787000AA996 /* whiteGradient.png */,
 				CF68986D1D4C08AF000AA996 /* whiteGradient2.png */,
@@ -281,6 +284,7 @@
 				CF2695EA1D3564D400C77D5E /* MakeReminderViewController.swift in Sources */,
 				CF2695C71D343D2900C77D5E /* AppDelegate.swift in Sources */,
 				CF2695E81D3564CA00C77D5E /* ListRemindersViewController.swift in Sources */,
+				CF107E5F1D5502F50086F56A /* UIButton+Extension.swift in Sources */,
 				CF6898721D4FBE50000AA996 /* AnnotationsViewController.swift in Sources */,
 				CF46C1221D4A887C001C2AE9 /* ClipTableViewCell.swift in Sources */,
 				CF2C04D31D397B14001A1C9A /* RealmHelper.swift in Sources */,

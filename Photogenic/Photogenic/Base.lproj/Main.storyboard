@@ -307,7 +307,6 @@
                         <outlet property="time" destination="hSM-as-n6P" id="ZKQ-Dr-tP6"/>
                         <segue destination="ebW-H3-muH" kind="unwind" identifier="cancel" unwindAction="unwindToListReviewViewController:" id="QLX-r3-R8m"/>
                         <segue destination="ebW-H3-muH" kind="unwind" identifier="done" unwindAction="unwindToListReviewViewController:" id="kyq-yg-RhC"/>
-                        <segue destination="5VI-tz-Xh8" kind="show" identifier="dispAnnotation" id="hDO-F3-cvz"/>
                         <segue destination="5VI-tz-Xh8" kind="show" identifier="addAnnotation" id="xOS-q8-1g7"/>
                     </connections>
                 </viewController>
@@ -396,6 +395,5 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="mvd-4b-ysU"/>
-        <segue reference="xOS-q8-1g7"/>
     </inferredMetricsTieBreakers>
 </document>

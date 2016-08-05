@@ -14,7 +14,7 @@ import AudioToolbox
 import MGSwipeTableCell
 class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegroundNotificationDelegate{
     @IBOutlet weak var tableView: UITableView!
-    var sentAnnotation: Annotation?
+//    var sentAnnotation: Annotation?
     
     @IBAction func doneTapped(sender: UIBarButtonItem) {
         print("inside donetapped")
@@ -60,6 +60,7 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
     
     @IBOutlet weak var backgroundImage: UIImageView!
     var reminder: Reminder?
+    var gotoAnnotationBeforeSave = false
     @IBOutlet weak var time: UILabel!
     var keyboardOffset = 80.0
     @IBOutlet weak var tapGesture: UITapGestureRecognizer!
@@ -69,12 +70,7 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
     @IBOutlet weak var datePicker: UIDatePicker!
     
     var differenceBetweenDates: NSTimeInterval?
-    var annotations: List<Annotation>! {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-
+//    var annotations: List<Annotation>?
     var dateNSFormat: NSDate?
     var dateStrFormat = ""
     var img : UIImage?
@@ -103,7 +99,6 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
         let calendar = NSCalendar.currentCalendar()
         let date = calendar.dateByAddingUnit(.Minute, value: 5, toDate: NSDate(), options: [])     // used to be `.CalendarUnitMinute`
         datePicker.minimumDate = date
-        
         self.view.addGestureRecognizer(tapGesture)
         //label colors
         nameTextField.backgroundColor = UIColor.clearColor()
@@ -123,7 +118,9 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
         time.text = strDate
         datePicker.setValue(0.8, forKeyPath: "alpha")
 //        UINavigationBar.appearance().barTintColor = UIColor(netHex: 0x34495e)
-        
+//        if self.reminder == nil{
+//            self.reminder = Reminder()
+//        }
     }
     
     
@@ -178,21 +175,34 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
             let qualityOfServiceClass = QOS_CLASS_BACKGROUND
             let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
             if let reminder = reminder {
-                let reminderUUID = reminder.uuid
-                dispatch_async(backgroundQueue, {
-                    let realm = try! Realm()
-                    
-                    try! realm.write(){
-                        let reminderFromRealm = realm.objectForPrimaryKey(Reminder.self, key: reminderUUID)!
-                        reminderFromRealm.name = newReminder.name
-                        //            reminderToBeUpdated.reminderDescription = newReminder.reminderDescription
-                        reminderFromRealm.time = newReminder.time
-                        reminderFromRealm.img = newReminder.img
-                        //  reminderToBeUpdated.tiem = newReminder.tiem
-                        reminderFromRealm.doot = newReminder.doot
-                    }
-                    
-                })
+                if gotoAnnotationBeforeSave {
+                    dispatch_async(backgroundQueue, {
+                        let realm = try! Realm()
+                        try! realm.write(){
+                            realm.add(newReminder)
+                        }
+                    })
+
+                } else {
+                    let reminderUUID = reminder.uuid
+                    dispatch_async(backgroundQueue, {
+                        let realm = try! Realm()
+                        
+                        try! realm.write(){
+                            if let reminderFromRealm = realm.objectForPrimaryKey(Reminder.self, key: reminderUUID) {
+                                reminderFromRealm.name = newReminder.name
+                                //  reminderToBeUpdated.reminderDescription = newReminder.reminderDescription
+                                reminderFromRealm.time = newReminder.time
+                                reminderFromRealm.img = newReminder.img
+                                //  reminderToBeUpdated.tiem = newReminder.tiem
+                                reminderFromRealm.doot = newReminder.doot
+                            }
+                            
+                        }
+                        
+                    })
+
+                }
                 
             } else {
                 // if note does not exist, create new note
@@ -210,14 +220,29 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
             
         }else if segue.identifier == "cancel"{
             print("cancelled new Post")
-        }else if segue.identifier == "dispAnnotation"{
-            let annotationsViewController = segue.destinationViewController as! AnnotationsViewController
-            annotationsViewController.img = img
-            annotationsViewController.getAnnotation = sentAnnotation
+        
         }else if segue.identifier == "addAnnotation"{
             let annotationsViewController = segue.destinationViewController as! AnnotationsViewController
-            annotationsViewController.img = img
-            annotationsViewController.annotations = annotations
+            annotationsViewController.img = self.img
+            
+            
+            if self.reminder == nil {
+                self.gotoAnnotationBeforeSave = true
+                let reminder = Reminder()
+                
+                reminder.name = nameTextField.text!
+                //            reminderDescription.text = reminder.reminderDescription
+                reminder.time = time.text!
+                //datePicker.date = dane!
+                //            shareWithTextField.text = ""
+                reminder.doot = datePicker.date
+                
+                annotationsViewController.reminder = reminder
+               
+            } else {
+                annotationsViewController.reminder = self.reminder
+            }
+            
             
         }
         
@@ -263,7 +288,7 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
         //unwind segue for makeReminder to call to unwind back to list reminder
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return annotations.count
+        return self.reminder!.annotations.count
     }
     // var imers: UIImage?
     
@@ -273,7 +298,7 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
         let cell = tableView.dequeueReusableCellWithIdentifier("clipTableViewCell", forIndexPath: indexPath) as! ClipTableViewCell
         //display what is on the table view
         let row = indexPath.row
-        let annotation = annotations[row]
+        let annotation = reminder!.annotations[row]
         //setters
         cell.label.text = annotation.text
         //imer is converting the img NSData from the reminder model to a UIImage to display in the background
@@ -302,7 +327,7 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! ClipTableViewCell
-        self.sentAnnotation = cell.annotation
+//        self.sentAnnotation = cell.annotation
         //
         //        self.date = String.backToDate(cell.cellTime.text!)
         //        self.selectedRecminder = reminders[indexPath.row]
@@ -310,7 +335,7 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate, BSForegr
         //        print(self.selectedRecminder?.name)
         //        tableView.deselectRowAtIndexPath(indexPath, animated: true)
         //        self.performSegueWithIdentifier("cameraToEdit", sender: self)
-        self.performSegueWithIdentifier("dispAnnotation", sender: self)
+       // self.performSegueWithIdentifier("dispAnnotation", sender: self)
         
     }
 
