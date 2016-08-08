@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import Parse
+
 import MGSwipeTableCell
 class ListRemindersTableViewCell: MGSwipeTableCell{
     @IBOutlet var backgroundImage: UIImageView!

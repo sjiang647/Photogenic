@@ -190,7 +190,7 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
         self.img = cell.backgroundImage.image
 //        
 //        self.date = String.backToDate(cell.cellTime.text!)
-//        self.selectedRecminder = reminders[indexPath.row]
+       self.selectedRecminder = reminders[indexPath.row]
 //        print(indexPath.row)
 //        print(self.selectedRecminder?.name)
 //        tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -224,6 +224,7 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
             }else if identifier == "ViewReminder"{
                 let viewViewController = segue.destinationViewController as! LookAtViewController
                 viewViewController.img = img
+                viewViewController.rem = self.selectedRecminder
             }else if identifier == "addReminder"{
                 let makeReminderViewController = segue.destinationViewController as! MakeReminderViewController
                 makeReminderViewController.img = img
@@ -237,47 +238,7 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
         //unwind segue for makeReminder to call to unwind back to list reminder
     }
     
-    func addEmoji(){
-        let ciImage  = CIImage(CGImage:img!.CGImage!)
-        let detector = CIDetector(
-            ofType: CIDetectorTypeFace,
-            context: nil,
-            options: [ CIDetectorAccuracy: CIDetectorAccuracyHigh ]
-        )
-        let faces = detector.featuresInImage(
-            ciImage,
-            options: [ CIDetectorSmile: true ]
-            ) as! [CIFaceFeature]
-        UIGraphicsBeginImageContext(img!.size)
-        img!.drawInRect(CGRectMake(0,0,img!.size.width,img!.size.height))
-        
-        for face in faces {
-            print(face.bounds)
-            
-            //context
-            let drawCtxt = UIGraphicsGetCurrentContext()
-            var rect = face.bounds
-            
-            rect.origin.y = img!.size.height - rect.origin.y - rect.size.height
-            var calloutView:UIImage!
-            
-            if face.hasSmile {
-                calloutView = UIImage(named:"smileyEmoji.jpg")
-            } else {
-                calloutView = UIImage(named:"sad.png")
-            }
-            
-            
-            calloutView!.drawInRect(rect)
-            
-            
-            CGContextStrokeRect(drawCtxt,rect)
-        }
-        let drawedImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        img = drawedImage
-    }
-
+   
 }
 
 extension UIColor {

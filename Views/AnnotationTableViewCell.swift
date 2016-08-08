@@ -10,7 +10,7 @@
 
 import Foundation
 import UIKit
-import Parse
+
 import MGSwipeTableCell
 class AnnotationTableViewCell: MGSwipeTableCell{
     var annotation: Annotation?
