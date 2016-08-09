@@ -15,7 +15,10 @@ class LookAtViewController: UIViewController{
     @IBOutlet weak var recImage: UIImageView!
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+//        self.recImage.contentMode = .ScaleAspectFit
         recImage.image = img
+        
         for ann in rem!.annotations{
             let pt = CGPointFromString(ann.coordStringFormat!)
             let frame = CGRectMake(pt.x, pt.y, 150, 30)

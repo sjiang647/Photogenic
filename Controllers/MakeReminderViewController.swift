@@ -14,47 +14,8 @@ import AudioToolbox
 import MGSwipeTableCell
 class MakeReminderViewController: UIViewController, UITextViewDelegate,UITableViewDelegate, UITableViewDataSource, BSForegroundNotificationDelegate{
     
-   
+    
     @IBOutlet weak var annotationTableView: UITableView!
-   
-    
-    @IBAction func doneTapped(sender: UIBarButtonItem) {
-        print("inside donetapped")
-        let pickerDate = self.datePicker.date
-        let currentDate = NSDate()
-        differenceBetweenDates = datePicker.date.timeIntervalSinceDate(currentDate)
-        let localNotification = UILocalNotification()
-        localNotification.fireDate = pickerDate
-        //        localNotification.applicationIconBadgeNumber += 1
-        localNotification.alertBody = "Don't forget about \(nameTextField.text!)!!!"
-        localNotification.soundName = UILocalNotificationDefaultSoundName
-        localNotification.category = ("BACKGROUND_NOTIF")
-        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
-        NSNotificationCenter.defaultCenter().postNotificationName("reloadData", object: self)
-        BSForegroundNotification.systemSoundID = 1001
-        let notif = BSForegroundNotification(userInfo: userInfoForCategory("ONE_BUTTON"))
-        
-        let triggerDate = Int64(differenceBetweenDates! * Double(NSEC_PER_SEC))
-        print(triggerDate)
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
-            triggerDate)
-        , dispatch_get_main_queue()){ () -> Void in
-            notif.presentNotification()
-        }
-        notif.delegate = self
-        
-        print("reminder is nil")
-        self.performSegueWithIdentifier("done", sender: self)
-        
-    }
-    
-    @IBAction func cancelTapped(sender: UIBarButtonItem) {
-        print("canceltapped")
-        self.performSegueWithIdentifier("cancel", sender: self)
-    }
-    //var appDelegate: AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
-    
-    
     @IBOutlet weak var backgroundImage: UIImageView!
     var reminder: Reminder?
     var gotoAnnotationBeforeSave = false
@@ -65,7 +26,6 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate,UITableVi
     //@IBOutlet weak var shareWithTextField: UITextField!
     //@IBOutlet weak var reminderDescription: UITextView!
     @IBOutlet weak var datePicker: UIDatePicker!
-    
     var differenceBetweenDates: NSTimeInterval?
     //    var annotations: List<Annotation>?
     var dateNSFormat: NSDate?
@@ -88,14 +48,15 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate,UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        self.backgroundImage.contentMode = .ScaleAspectFit
         annotationTableView.backgroundColor = UIColor.clearColor()
-//        self.view.addSubview(tableView)
+        //        self.view.addSubview(tableView)
         annotationTableView.delegate = self
         annotationTableView.dataSource = self
         print("inside Makereminder's ViewDidLoad")
         datePicker.addTarget(self, action: #selector(MakeReminderViewController.datePickerChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
         backgroundImage.image = self.img
-//        print("viewDidLoad")
+        //        print("viewDidLoad")
         print(self.reminder?.name)
         let calendar = NSCalendar.currentCalendar()
         let date = calendar.dateByAddingUnit(.Minute, value: 5, toDate: NSDate(), options: [])     // used to be `.CalendarUnitMinute`
@@ -118,29 +79,11 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate,UITableVi
         let strDate = dateFormatter.stringFromDate(datePicker.date)
         time.text = strDate
         datePicker.setValue(0.8, forKeyPath: "alpha")
-        //        UINavigationBar.appearance().barTintColor = UIColor(netHex: 0x34495e)
-        //        if self.reminder == nil{
-        //            self.reminder = Reminder()
-        //        }
     }
-    
-    
-    
-    //    func textViewDidChange(textView: UITextView) {
-    //        self.descriptionLabel.hidden = reminderDescription.text.characters.count > 0
-    //    }
-    //
-    //    func textViewDidEndEditing(textView: UITextView) {
-    //        self.descriptionLabel.hidden = reminderDescription.text.characters.count > 0
-    //    }
-    //
     
     //Changes the label for the date whenever the time scroll wheel changes
     func datePickerChanged(datePicker:UIDatePicker) {
         let dateFormatter = NSDateFormatter()
-        //        if NSDate().compare(dateNSFormat!) == NSComparisonResult.OrderedDescending{
-        //            AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
-        //        }
         if datePicker.date.compare(datePicker.minimumDate!) == .OrderedAscending {
             AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
         }
@@ -151,15 +94,39 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate,UITableVi
         time.text = strDate
         dateStrFormat = strDate
         dateNSFormat = datePicker.date
-        
-        //  dane = datePicker.date
     }
     
-    //prepareForSegue for unwind back into listReminders
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         
         if segue.identifier == "done" {
+            print("inside donetapped")
+            let pickerDate = self.datePicker.date
+            let currentDate = NSDate()
+            differenceBetweenDates = datePicker.date.timeIntervalSinceDate(currentDate)
+            let localNotification = UILocalNotification()
+            localNotification.fireDate = pickerDate
+            //        localNotification.applicationIconBadgeNumber += 1
+            localNotification.alertBody = "Don't forget about \(nameTextField.text!)!!!"
+            localNotification.soundName = UILocalNotificationDefaultSoundName
+            localNotification.category = ("BACKGROUND_NOTIF")
+            UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+            NSNotificationCenter.defaultCenter().postNotificationName("reloadData", object: self)
+//            BSForegroundNotification.systemSoundID = 1001
+//            let notif = BSForegroundNotification(userInfo: userInfoForCategory("ONE_BUTTON"))
+//            
+//            let triggerDate = Int64(differenceBetweenDates! * Double(NSEC_PER_SEC))
+//            print(triggerDate)
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
+//                triggerDate)
+//            , dispatch_get_main_queue()){ () -> Void in
+//                notif.presentNotification()
+//            }
+//            notif.delegate = self
+            
+            print("reminder is nil")
+            //            self.performSegueWithIdentifier("done", sender: self)
+            
             let listRemindersViewController = segue.destinationViewController as! ListRemindersViewController
             print("prepareFor")
             
@@ -173,10 +140,12 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate,UITableVi
             print(newReminder.doot)
             print(newReminder.time)
             newReminder.img = UIImagePNGRepresentation(self.img!)
-            if reminder!.annotations.count == 0{
+            if self.reminder == nil{
             }else{
-                newReminder.annotations = self.reminder!.annotations
-                
+                if self.reminder!.annotations.count == 0 {
+                }else{
+                    newReminder.annotations = self.reminder!.annotations
+                }
             }
             let qualityOfServiceClass = QOS_CLASS_BACKGROUND
             let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
@@ -184,6 +153,7 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate,UITableVi
                 if gotoAnnotationBeforeSave {
                     dispatch_async(backgroundQueue, {
                         let realm = try! Realm()
+//                        print(realm.getPath())
                         try! realm.write(){
                             realm.add(newReminder)
                         }
@@ -266,26 +236,17 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate,UITableVi
         super.viewWillAppear(animated)
         print("inside makeReminder's viewWillAppear")
         print(self.reminder?.annotations.count)
-            // 1
+        // 1
         if let reminder = reminder {
             // 2
             nameTextField.text = reminder.name
-            //            reminderDescription.text = reminder.reminderDescription
             time.text = reminder.time
-            //datePicker.date = dane!
-            //            shareWithTextField.text = ""
             datePicker.setDate(dateNSFormat!, animated: true)
             datePicker.date = dateNSFormat!
             
         } else {
-            // 3
-            
             nameTextField.text = ""
-            //            reminderDescription.text = ""
             time.text = ""
-            // datePicker.date = dane!
-            //datePicker.setDate(dateNSFormat!, animated: true)
-            //            shareWithTextField.text = ""
             dateNSFormat = datePicker.date
         }
         annotationTableView.reloadData()
@@ -297,20 +258,17 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate,UITableVi
         if reminder == nil{
             return 0
         }else{
-        return self.reminder!.annotations.count
+            return self.reminder!.annotations.count
         }
     }
-    // var imers: UIImage?
     
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("annotationTableViewCell", forIndexPath: indexPath) as! AnnotationTableViewCell
-        //display what is on the table view
         let row = indexPath.row
         if reminder != nil{
             let annotation = reminder!.annotations[row]
-            //setters
             cell.annotationText.text = annotation.text
             cell.num.text = "\(indexPath.row + 1)."
             //imer is converting the img NSData from the reminder model to a UIImage to display in the background
@@ -325,9 +283,9 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate,UITableVi
             })]
             cell.rightSwipeSettings.transition = MGSwipeTransition.Rotate3D
             
-           
+            
         }
-         return cell
+        return cell
     }
     
     

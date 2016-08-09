@@ -41,7 +41,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Puc-Ww-7ay">
+                                                <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Puc-Ww-7ay">
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="99"/>
                                                 </imageView>
                                             </subviews>
@@ -160,7 +160,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eAd-WR-3cA">
+                            <imageView userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eAd-WR-3cA">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="whiteGradient2.png" translatesAutoresizingMaskIntoConstraints="NO" id="kBc-QJ-L5D">
@@ -224,13 +224,13 @@
                                                         <constraint firstAttribute="width" constant="42" id="9Z9-IG-OeO"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OiZ-tP-tD6">
                                                     <rect key="frame" x="66" y="11" width="518" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -258,7 +258,7 @@
                                     <constraint firstAttribute="width" constant="150" id="k8K-2b-YA9"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -294,11 +294,13 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Y40-aE-w5X">
                             <connections>
                                 <action selector="cancelTapped:" destination="Ql4-hg-hg1" id="oev-Bk-jtR"/>
+                                <segue destination="ebW-H3-muH" kind="unwind" identifier="cancel" unwindAction="unwindToListReviewViewController:" id="r9y-xU-sir"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="gX8-hw-iIi">
                             <connections>
                                 <action selector="doneTapped:" destination="Ql4-hg-hg1" id="0yW-rP-w7p"/>
+                                <segue destination="ebW-H3-muH" kind="unwind" identifier="done" unwindAction="unwindToListReviewViewController:" id="mXe-5O-MQO"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -309,8 +311,6 @@
                         <outlet property="nameTextField" destination="MpJ-zu-svV" id="S5U-aa-GhJ"/>
                         <outlet property="tapGesture" destination="MQv-Qd-fLU" id="Wjc-o7-Djx"/>
                         <outlet property="time" destination="hSM-as-n6P" id="ZKQ-Dr-tP6"/>
-                        <segue destination="ebW-H3-muH" kind="unwind" identifier="cancel" unwindAction="unwindToListReviewViewController:" id="QLX-r3-R8m"/>
-                        <segue destination="ebW-H3-muH" kind="unwind" identifier="done" unwindAction="unwindToListReviewViewController:" id="kyq-yg-RhC"/>
                         <segue destination="5VI-tz-Xh8" kind="show" identifier="addAnnotation" id="xOS-q8-1g7"/>
                     </connections>
                 </viewController>
