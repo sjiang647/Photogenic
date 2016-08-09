@@ -78,16 +78,17 @@ class AnnotationsViewController: UIViewController,  UIGestureRecognizerDelegate{
             
             let DynamicView=UIView(frame: frame)
             self.arrayOfDynamicViews.append(DynamicView)
-            DynamicView.backgroundColor=UIColor(netHex: 0x3498db)
+            DynamicView.backgroundColor=UIColor(netHex: 0x00ADDB)
             DynamicView.layer.cornerRadius=10
-            let del = IdentifiedButton(frame: CGRectMake(point!.x+100, point!.y, 50, 30))
+            let del = IdentifiedButton(frame: CGRectMake(point!.x+120, point!.y, 30, 30))
             del.tag = self.arrayOfDynamicViews.count - 1
             del.tag2 = reminder!.annotations.count
-            del.backgroundColor = UIColor.whiteColor()
-            del.setTitle("delete", forState: UIControlState.Normal)
-            //            del.
+            del.backgroundColor = UIColor(netHex: 0x00ADDB)
+//            del.setTitle("del", forState: UIControlState.Normal)
+            del.setImage(UIImage(named: "Icon-60"), forState:  UIControlState.Normal)
             del.addTarget(self, action: #selector(handleButton), forControlEvents: .TouchUpInside)
-            let text = UITextField(frame: CGRectMake(0,0,100,30))
+            let text = UITextField(frame: CGRectMake(5,0,100,30))
+            text.textColor = UIColor(netHex: 0x424242)
             text.delegate = self
             text.becomeFirstResponder()
             DynamicView.addSubview(text)

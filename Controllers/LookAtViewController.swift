@@ -23,9 +23,10 @@ class LookAtViewController: UIViewController{
             let pt = CGPointFromString(ann.coordStringFormat!)
             let frame = CGRectMake(pt.x, pt.y, 150, 30)
             let DynamicView=UIView(frame: frame)
-            DynamicView.backgroundColor=UIColor(netHex: 0x3498db)
+            DynamicView.backgroundColor=UIColor(netHex: 0x00ADDB)
             DynamicView.layer.cornerRadius=10
-            let text = UITextField(frame: CGRectMake(0,0,150,30))
+            let text = UITextField(frame: CGRectMake(5,0,150,30))
+            text.textColor = UIColor(netHex: 0x424242)
             if ann.text == ""{
                 text.text = ""
             }else{

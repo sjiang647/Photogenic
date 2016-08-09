@@ -81,12 +81,12 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
     
     override func viewDidLoad(){
         super.viewDidLoad()
-        navigationController?.navigationBar.tintColor = UIColor(netHex: 0xecf0f1)
+        navigationController?.navigationBar.tintColor = UIColor(netHex: 0xECF0F1)
 //        navigationController?.navigationBar.barTintColor = UIColor(netHex: 0x3498db)
-        UINavigationBar.appearance().barTintColor = UIColor(netHex: 0x3498db)
+        UINavigationBar.appearance().barTintColor = UIColor(netHex: 0x00ADDB)
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor(netHex: 0xecf0f1)]
         navigationController?.navigationBar.translucent = false
-        tableView.backgroundColor = UIColor(netHex: 0xecf0f1)
+        tableView.backgroundColor = UIColor(netHex: 0xECF0F1)
 //        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         //swipe recognition
         
@@ -153,13 +153,13 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
         cell.cellTime.text = reminders[row].doot!.convertToString()
         //cell.cellDescription.text = reminder.reminderDescription
         cell.backgroundImage.image = imer
-        cell.rightButtons = [MGSwipeButton(title: "", icon: UIImage(named: "Icon-61.png"), backgroundColor: UIColor(netHex: 0xe74c3c), callback: {
+        cell.rightButtons = [MGSwipeButton(title: "", icon: UIImage(named: "Icon-61.png"), backgroundColor: UIColor(netHex: 0x007294), callback: {
             (sender: MGSwipeTableCell!) -> Bool in
             
             RealmHelper.deleteReminder(self.reminders[indexPath.row])
             self.reminders = RealmHelper.retrieveReminders()
             return true
-        }), MGSwipeButton(title: "", icon: UIImage(named:"Icon-62.png"), backgroundColor: UIColor(netHex: 0x2ecc71), callback: {
+        }), MGSwipeButton(title: "", icon: UIImage(named:"Icon-62.png"), backgroundColor: UIColor(netHex: 0x00ADDB), callback: {
             (sender: MGSwipeTableCell!) -> Bool in
             
             self.img = cell.backgroundImage.image
