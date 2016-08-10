@@ -23,15 +23,11 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate,UITableVi
     var keyboardOffset = 80.0
     @IBOutlet weak var tapGesture: UITapGestureRecognizer!
     @IBOutlet weak var nameTextField: UITextField!
-    //@IBOutlet weak var shareWithTextField: UITextField!
-    //@IBOutlet weak var reminderDescription: UITextView!
     @IBOutlet weak var datePicker: UIDatePicker!
     var differenceBetweenDates: NSTimeInterval?
-    //    var annotations: List<Annotation>?
     var dateNSFormat: NSDate?
     var dateStrFormat = ""
     var img : UIImage?
-    //let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     private func userInfoForCategory(category: String) -> [NSObject: AnyObject] {
         
         return ["aps": [
@@ -48,37 +44,32 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate,UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.backgroundImage.contentMode = .ScaleAspectFit
+        
+        datePicker.setValue(UIColor.whiteColor(), forKeyPath: "textColor")
         annotationTableView.backgroundColor = UIColor.clearColor()
-        //        self.view.addSubview(tableView)
         annotationTableView.delegate = self
         annotationTableView.dataSource = self
         print("inside Makereminder's ViewDidLoad")
         datePicker.addTarget(self, action: #selector(MakeReminderViewController.datePickerChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        var blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+        var blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        view.addSubview(blurEffectView)
         backgroundImage.image = self.img
-        //        print("viewDidLoad")
         print(self.reminder?.name)
         let calendar = NSCalendar.currentCalendar()
-        let date = calendar.dateByAddingUnit(.Minute, value: 5, toDate: NSDate(), options: [])     // used to be `.CalendarUnitMinute`
+        let date = calendar.dateByAddingUnit(.Minute, value: 5, toDate: NSDate(), options: [])
         datePicker.minimumDate = date
         self.view.addGestureRecognizer(tapGesture)
-        //label colors
         nameTextField.backgroundColor = UIColor.clearColor()
-        //        shareWithTextField.backgroundColor = UIColor.clearColor()
-        //        reminderDescription.backgroundColor = UIColor.clearColor()
         datePicker.backgroundColor = UIColor.clearColor()
-        //        self.reminderDescription.layer.borderColor = UIColor.blackColor().CGColor
-        //        self.reminderDescription.layer.borderWidth = 1.0
-        
-        differenceBetweenDates = 310.0
         let dateFormatter = NSDateFormatter()
-        
         dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
         dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
-        
         let strDate = dateFormatter.stringFromDate(datePicker.date)
         time.text = strDate
-        datePicker.setValue(0.8, forKeyPath: "alpha")
+        datePicker.setValue(1, forKeyPath: "alpha")
     }
     
     //Changes the label for the date whenever the time scroll wheel changes
@@ -234,6 +225,12 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate,UITableVi
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        var blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+        var blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = self.view.bounds
+        blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
+        self.view.insertSubview(blurEffectView, atIndex: 0)
+
         print("inside makeReminder's viewWillAppear")
         print(self.reminder?.annotations.count)
         // 1
@@ -299,17 +296,6 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate,UITableVi
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! AnnotationTableViewCell
-        
-        //        self.sentAnnotation = cell.annotation
-        //
-        //        self.date = String.backToDate(cell.cellTime.text!)
-        //        self.selectedRecminder = reminders[indexPath.row]
-        //        print(indexPath.row)
-        //        print(self.selectedRecminder?.name)
-        //        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        //        self.performSegueWithIdentifier("cameraToEdit", sender: self)
-        // self.performSegueWithIdentifier("dispAnnotation", sender: self)
-        
     }
     
     
