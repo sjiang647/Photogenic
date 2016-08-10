@@ -78,19 +78,23 @@ class AnnotationsViewController: UIViewController,  UIGestureRecognizerDelegate{
             
             let DynamicView=UIView(frame: frame)
             self.arrayOfDynamicViews.append(DynamicView)
-            DynamicView.backgroundColor=UIColor(netHex: 0x00ADDB)
+            DynamicView.backgroundColor=UIColor.clearColor()
+//            (netHex: 0x00ADDB)
             DynamicView.layer.cornerRadius=10
             let del = IdentifiedButton(frame: CGRectMake(point!.x+120, point!.y, 30, 30))
             del.tag = self.arrayOfDynamicViews.count - 1
             del.tag2 = reminder!.annotations.count
-            del.backgroundColor = UIColor(netHex: 0x00ADDB)
-//            del.setTitle("del", forState: UIControlState.Normal)
+            del.backgroundColor = UIColor.clearColor()
+//                UIColor(netHex: 0x00ADDB)
             del.setImage(UIImage(named: "Icon-60"), forState:  UIControlState.Normal)
             del.addTarget(self, action: #selector(handleButton), forControlEvents: .TouchUpInside)
             let text = UITextField(frame: CGRectMake(5,0,100,30))
-            text.textColor = UIColor(netHex: 0x424242)
+            text.textColor = UIColor(netHex: 0xDCDFE0)
             text.delegate = self
             text.becomeFirstResponder()
+            let imag = UIImageView(image: UIImage(named: "Rectangle 4"))
+            imag.frame = CGRectMake(-5, 0, 160, 30)
+            DynamicView.addSubview(imag)
             DynamicView.addSubview(text)
             self.view.addSubview(DynamicView)
             self.view.addSubview(del)
@@ -116,25 +120,7 @@ class AnnotationsViewController: UIViewController,  UIGestureRecognizerDelegate{
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let makeReminderViewController = segue.destinationViewController as! MakeReminderViewController
         if segue.identifier == "finished" {
-            //            let newReminder = Reminder()
-            //            newReminder.annotations = reminder!.annotations
-            //            newReminder.img = reminder?.img
-            //            newReminder.uuid = reminder!.uuid
-            //            newReminder.doot = reminder?.doot
-            //            newReminder.time = reminder!.time
-            //            newReminder.name = reminder!.name
-            //
-            //
-            //            let realm = try! Realm()
-            //            try! realm.write(){
-            //                reminder = newReminder
-            //                //                reminder!.annotations = annotations
-            //            }
-            //            for anno in annotations {
-            //                print(anno.text)
-            //                print(anno.coordStringFormat)
-            //            }
-            makeReminderViewController.reminder = self.reminder!
+                    makeReminderViewController.reminder = self.reminder!
         }
         else if segue.identifier == "cancelAnnotation"{
             

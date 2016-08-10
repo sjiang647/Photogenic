@@ -44,18 +44,14 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate,UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        nameTextField.attributedPlaceholder = NSAttributedString(string:"Name for reminder",
+                                                                 attributes:[NSForegroundColorAttributeName: UIColor(netHex: 0xAFB2B2)])
         datePicker.setValue(UIColor.whiteColor(), forKeyPath: "textColor")
         annotationTableView.backgroundColor = UIColor.clearColor()
         annotationTableView.delegate = self
         annotationTableView.dataSource = self
         print("inside Makereminder's ViewDidLoad")
         datePicker.addTarget(self, action: #selector(MakeReminderViewController.datePickerChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
-        var blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
-        var blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = view.bounds
-        blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-        view.addSubview(blurEffectView)
         backgroundImage.image = self.img
         print(self.reminder?.name)
         let calendar = NSCalendar.currentCalendar()
@@ -70,6 +66,9 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate,UITableVi
         let strDate = dateFormatter.stringFromDate(datePicker.date)
         time.text = strDate
         datePicker.setValue(1, forKeyPath: "alpha")
+        datePicker.setValue(UIColor.whiteColor(), forKeyPath: "textColor")
+        //        view.insertSubview(blurEffectView, atIndex: 0)
+        backgroundImage.makeBlurImage(backgroundImage)
     }
     
     //Changes the label for the date whenever the time scroll wheel changes
@@ -103,17 +102,17 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate,UITableVi
             localNotification.category = ("BACKGROUND_NOTIF")
             UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
             NSNotificationCenter.defaultCenter().postNotificationName("reloadData", object: self)
-//            BSForegroundNotification.systemSoundID = 1001
-//            let notif = BSForegroundNotification(userInfo: userInfoForCategory("ONE_BUTTON"))
-//            
-//            let triggerDate = Int64(differenceBetweenDates! * Double(NSEC_PER_SEC))
-//            print(triggerDate)
-//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
-//                triggerDate)
-//            , dispatch_get_main_queue()){ () -> Void in
-//                notif.presentNotification()
-//            }
-//            notif.delegate = self
+            //            BSForegroundNotification.systemSoundID = 1001
+            //            let notif = BSForegroundNotification(userInfo: userInfoForCategory("ONE_BUTTON"))
+            //
+            //            let triggerDate = Int64(differenceBetweenDates! * Double(NSEC_PER_SEC))
+            //            print(triggerDate)
+            //            dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
+            //                triggerDate)
+            //            , dispatch_get_main_queue()){ () -> Void in
+            //                notif.presentNotification()
+            //            }
+            //            notif.delegate = self
             
             print("reminder is nil")
             //            self.performSegueWithIdentifier("done", sender: self)
@@ -144,7 +143,7 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate,UITableVi
                 if gotoAnnotationBeforeSave {
                     dispatch_async(backgroundQueue, {
                         let realm = try! Realm()
-//                        print(realm.getPath())
+                        //                        print(realm.getPath())
                         try! realm.write(){
                             realm.add(newReminder)
                         }
@@ -225,12 +224,7 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate,UITableVi
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        var blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
-        var blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = self.view.bounds
-        blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
-        self.view.insertSubview(blurEffectView, atIndex: 0)
-
+        
         print("inside makeReminder's viewWillAppear")
         print(self.reminder?.annotations.count)
         // 1
@@ -320,5 +314,28 @@ extension String{
         let dateString: NSDate = formatter.dateFromString(string)!
         return dateString
     }
+    
+}
+extension UIImageView{
+    
+    func makeBlurImage(targetImageView:UIImageView?)
+    {
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = targetImageView!.bounds
+        
+        blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
+        targetImageView?.addSubview(blurEffectView)
+    }
+    func makeLightBlurImage(targetImageView:UIImageView?)
+    {
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = targetImageView!.bounds
+        
+        blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
+        targetImageView?.addSubview(blurEffectView)
+    }
+
     
 }

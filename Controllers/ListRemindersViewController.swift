@@ -22,6 +22,7 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
             tableView.reloadData()
         }
     }
+    @IBOutlet weak var backGroundPicture: UIImageView!
     
     @IBAction func addReminder(sender: AnyObject) {
         if (UIImagePickerController.isSourceTypeAvailable(.Camera)) {
@@ -87,21 +88,15 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor(netHex: 0xecf0f1)]
         navigationController?.navigationBar.translucent = false
         tableView.backgroundColor = UIColor(netHex: 0xECF0F1)
-//        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        //swipe recognition
-        
-//        let recognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "swipeRight:")
         tableView.delegate = self
-//        recognizer.direction = .Right
-//        self.view .addGestureRecognizer(recognizer)
-        //get reminders
         RealmHelper.notificationToken = RealmHelper.realm.addNotificationBlock { [unowned self] note, realm in
             dispatch_async(dispatch_get_main_queue(), {
                 self.tableView.reloadData()
             })
             
         }
-        
+        self.backGroundPicture.makeLightBlurImage(self.backGroundPicture)
+        tableView.backgroundColor = UIColor.clearColor()
         self.reminders = RealmHelper.retrieveReminders()
         //camera
         if (UIImagePickerController.isSourceTypeAvailable(.Camera)) {
