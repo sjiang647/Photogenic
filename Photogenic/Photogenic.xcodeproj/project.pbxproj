@@ -19,8 +19,6 @@
 		CF2695EC1D3565B600C77D5E /* ListRemindersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2695EB1D3565B600C77D5E /* ListRemindersTableViewCell.swift */; };
 		CF2C04D31D397B14001A1C9A /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C04D21D397B14001A1C9A /* RealmHelper.swift */; };
 		CF46C1281D4BC6E4001C2AE9 /* LookAtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF46C1271D4BC6E4001C2AE9 /* LookAtViewController.swift */; };
-		CF68986C1D4C0787000AA996 /* whiteGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = CF68986B1D4C0787000AA996 /* whiteGradient.png */; };
-		CF68986E1D4C08AF000AA996 /* whiteGradient2.png in Resources */ = {isa = PBXBuildFile; fileRef = CF68986D1D4C08AF000AA996 /* whiteGradient2.png */; };
 		CF6898701D4FB3B1000AA996 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF68986F1D4FB3B1000AA996 /* MapKit.framework */; };
 		CF6898721D4FBE50000AA996 /* AnnotationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6898711D4FBE50000AA996 /* AnnotationsViewController.swift */; };
 		CF6898741D4FC850000AA996 /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6898731D4FC850000AA996 /* Annotation.swift */; };
@@ -45,8 +43,6 @@
 		CF2695EB1D3565B600C77D5E /* ListRemindersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListRemindersTableViewCell.swift; sourceTree = "<group>"; };
 		CF2C04D21D397B14001A1C9A /* RealmHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
 		CF46C1271D4BC6E4001C2AE9 /* LookAtViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LookAtViewController.swift; sourceTree = "<group>"; };
-		CF68986B1D4C0787000AA996 /* whiteGradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = whiteGradient.png; path = ../../../../../Desktop/whiteGradient.png; sourceTree = "<group>"; };
-		CF68986D1D4C08AF000AA996 /* whiteGradient2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = whiteGradient2.png; path = ../../../../../Desktop/whiteGradient2.png; sourceTree = "<group>"; };
 		CF68986F1D4FB3B1000AA996 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		CF6898711D4FBE50000AA996 /* AnnotationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationsViewController.swift; sourceTree = "<group>"; };
 		CF6898731D4FC850000AA996 /* Annotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Annotation.swift; sourceTree = "<group>"; };
@@ -114,8 +110,6 @@
 				CF2695C61D343D2900C77D5E /* AppDelegate.swift */,
 				CF107E5E1D5502F50086F56A /* UIButton+Extension.swift */,
 				CF2695CD1D343D2900C77D5E /* Assets.xcassets */,
-				CF68986B1D4C0787000AA996 /* whiteGradient.png */,
-				CF68986D1D4C08AF000AA996 /* whiteGradient2.png */,
 				CF107E5B1D53AD030086F56A /* Main.storyboard */,
 				CF2695CF1D343D2900C77D5E /* LaunchScreen.storyboard */,
 				CF2695D21D343D2900C77D5E /* Info.plist */,
@@ -221,8 +215,6 @@
 				CF2695D11D343D2900C77D5E /* LaunchScreen.storyboard in Resources */,
 				CF107E5D1D53AD030086F56A /* Main.storyboard in Resources */,
 				CF2695CE1D343D2900C77D5E /* Assets.xcassets in Resources */,
-				CF68986E1D4C08AF000AA996 /* whiteGradient2.png in Resources */,
-				CF68986C1D4C0787000AA996 /* whiteGradient.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

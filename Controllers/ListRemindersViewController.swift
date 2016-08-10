@@ -22,6 +22,7 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
             tableView.reloadData()
         }
     }
+    @IBOutlet weak var backGroundPicture: UIImageView!
     
     @IBAction func addReminder(sender: AnyObject) {
         if (UIImagePickerController.isSourceTypeAvailable(.Camera)) {
@@ -62,7 +63,7 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
                 img = fixedImage
             }
 
-            img = pickedImage
+//            img = pickedImage
             //            UIImageWriteToSavedPhotosAlbum(pickedImage, self, selectorToCall, nil)
         }
         imagePicker.dismissViewControllerAnimated(true, completion: {
@@ -81,27 +82,21 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
     
     override func viewDidLoad(){
         super.viewDidLoad()
-        navigationController?.navigationBar.tintColor = UIColor(netHex: 0xecf0f1)
+        navigationController?.navigationBar.tintColor = UIColor(netHex: 0xECF0F1)
 //        navigationController?.navigationBar.barTintColor = UIColor(netHex: 0x3498db)
-        UINavigationBar.appearance().barTintColor = UIColor(netHex: 0x3498db)
+        UINavigationBar.appearance().barTintColor = UIColor(netHex: 0x00ADDB)
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor(netHex: 0xecf0f1)]
         navigationController?.navigationBar.translucent = false
-        tableView.backgroundColor = UIColor(netHex: 0xecf0f1)
-//        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        //swipe recognition
-        
-//        let recognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "swipeRight:")
+        tableView.backgroundColor = UIColor(netHex: 0xECF0F1)
         tableView.delegate = self
-//        recognizer.direction = .Right
-//        self.view .addGestureRecognizer(recognizer)
-        //get reminders
         RealmHelper.notificationToken = RealmHelper.realm.addNotificationBlock { [unowned self] note, realm in
             dispatch_async(dispatch_get_main_queue(), {
                 self.tableView.reloadData()
             })
             
         }
-        
+        self.backGroundPicture.makeLightBlurImage(self.backGroundPicture)
+        tableView.backgroundColor = UIColor.clearColor()
         self.reminders = RealmHelper.retrieveReminders()
         //camera
         if (UIImagePickerController.isSourceTypeAvailable(.Camera)) {
@@ -142,6 +137,7 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("listRemindersTableViewCell", forIndexPath: indexPath) as! ListRemindersTableViewCell
         //display what is on the table view
+//        cell.backgroundImage.contentMode = .ScaleAspectFit
         let row = indexPath.row
 //        let reminder = reminders[row]
         //setters
@@ -152,13 +148,13 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
         cell.cellTime.text = reminders[row].doot!.convertToString()
         //cell.cellDescription.text = reminder.reminderDescription
         cell.backgroundImage.image = imer
-        cell.rightButtons = [MGSwipeButton(title: "", icon: UIImage(named: "Icon-61.png"), backgroundColor: UIColor(netHex: 0xe74c3c), callback: {
+        cell.rightButtons = [MGSwipeButton(title: "", icon: UIImage(named: "Icon-61.png"), backgroundColor: UIColor(netHex: 0x007294), callback: {
             (sender: MGSwipeTableCell!) -> Bool in
             
             RealmHelper.deleteReminder(self.reminders[indexPath.row])
             self.reminders = RealmHelper.retrieveReminders()
             return true
-        }), MGSwipeButton(title: "", icon: UIImage(named:"Icon-62.png"), backgroundColor: UIColor(netHex: 0x2ecc71), callback: {
+        }), MGSwipeButton(title: "", icon: UIImage(named:"Icon-62.png"), backgroundColor: UIColor(netHex: 0x00ADDB), callback: {
             (sender: MGSwipeTableCell!) -> Bool in
             
             self.img = cell.backgroundImage.image
@@ -309,5 +305,48 @@ extension UIImage {
         let cgImage: CGImageRef = CGBitmapContextCreateImage(ctx)!
         
         return UIImage(CGImage: cgImage)
+    }
+}
+extension UIImage {
+    public func imageRotatedByDegrees(degrees: CGFloat, flip: Bool) -> UIImage {
+        let radiansToDegrees: (CGFloat) -> CGFloat = {
+            return $0 * (180.0 / CGFloat(M_PI))
+        }
+        let degreesToRadians: (CGFloat) -> CGFloat = {
+            return $0 / 180.0 * CGFloat(M_PI)
+        }
+        
+        // calculate the size of the rotated view's containing box for our drawing space
+        let rotatedViewBox = UIView(frame: CGRect(origin: CGPointZero, size: size))
+        let t = CGAffineTransformMakeRotation(degreesToRadians(degrees));
+        rotatedViewBox.transform = t
+        let rotatedSize = rotatedViewBox.frame.size
+        
+        // Create the bitmap context
+        UIGraphicsBeginImageContext(rotatedSize)
+        let bitmap = UIGraphicsGetCurrentContext()
+        
+        // Move the origin to the middle of the image so we will rotate and scale around the center.
+        CGContextTranslateCTM(bitmap, rotatedSize.width / 2.0, rotatedSize.height / 2.0);
+        
+        //   // Rotate the image context
+        CGContextRotateCTM(bitmap, degreesToRadians(degrees));
+        
+        // Now, draw the rotated/scaled image into the context
+        var yFlip: CGFloat
+        
+        if(flip){
+            yFlip = CGFloat(-1.0)
+        } else {
+            yFlip = CGFloat(1.0)
+        }
+        
+        CGContextScaleCTM(bitmap, yFlip, -1.0)
+        CGContextDrawImage(bitmap, CGRectMake(-size.width / 2, -size.height / 2, size.width, size.height), CGImage)
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
     }
 }
