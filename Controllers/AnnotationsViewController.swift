@@ -25,13 +25,6 @@ class AnnotationsViewController: UIViewController,  UIGestureRecognizerDelegate{
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         print("inside viewWillAppear Annotations")
-//        print(self.reminder)
-//        let stringu = "{72.5, 218}"
-//        let point = CGPointFromString(stringu)
-//        let framer = CGRectMake(point.x, point.y, 150, 30)
-//        let viee = UIView(frame: framer)
-//        viee.backgroundColor = UIColor.blackColor()
-//        self.view.addSubview(viee)
         print(self.reminder?.annotations)
         print(reminder!.annotations.count)
         if reminder!.annotations.count == 0 {
@@ -40,18 +33,37 @@ class AnnotationsViewController: UIViewController,  UIGestureRecognizerDelegate{
         } else {
             for ann in reminder!.annotations{
                 let pt = CGPointFromString(ann.coordStringFormat!)
+
                 let frame = CGRectMake(pt.x, pt.y, 150, 30)
+                
                 let DynamicView=UIView(frame: frame)
-                DynamicView.backgroundColor=UIColor(netHex: 0x3498db)
+                self.arrayOfDynamicViews.append(DynamicView)
+                DynamicView.backgroundColor=UIColor.clearColor()
+                //            (netHex: 0x00ADDB)
                 DynamicView.layer.cornerRadius=10
-                let text = UITextField(frame: CGRectMake(0,0,150,30))
+                let del = IdentifiedButton(frame: CGRectMake(pt.x+120, pt.y, 30, 30))
+                del.tag = self.arrayOfDynamicViews.count - 1
+                del.tag2 = reminder!.annotations.count
+                del.backgroundColor = UIColor.clearColor()
+                //                UIColor(netHex: 0x00ADDB)
+                del.setImage(UIImage(named: "Icon-60"), forState:  UIControlState.Normal)
+                del.addTarget(self, action: #selector(handleButton), forControlEvents: .TouchUpInside)
+                let text = UITextField(frame: CGRectMake(5,0,100,30))
+                text.textColor = UIColor(netHex: 0xDCDFE0)
                 if ann.text == ""{
                     text.text = ""
                 }else{
                     text.text = ann.text
                 }
+
+                let imag = UIImageView(image: UIImage(named: "Rectangle 4"))
+                imag.frame = CGRectMake(-5, 0, 160, 30)
+                DynamicView.addSubview(imag)
                 DynamicView.addSubview(text)
                 self.view.addSubview(DynamicView)
+                self.view.addSubview(del)
+
+                
             }
             
         }
@@ -131,6 +143,9 @@ class AnnotationsViewController: UIViewController,  UIGestureRecognizerDelegate{
 
 extension AnnotationsViewController : UITextFieldDelegate {
     func textFieldDidEndEditing(textField: UITextField) {
-        self.lastAnnotation.text = textField.text
+        let realm = try! Realm()
+        try! realm.write(){
+            lastAnnotation.text = textField.text
+        }
     }
 }
