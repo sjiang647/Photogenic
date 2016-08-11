@@ -23,7 +23,6 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
             tableView.reloadData()
         }
     }
-    @IBOutlet weak var backGroundPicture: UIImageView!
     
     @IBAction func addReminder(sender: AnyObject) {
         if (UIImagePickerController.isSourceTypeAvailable(.Camera)) {
@@ -96,7 +95,6 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
             })
             
         }
-        self.backGroundPicture.makeLightBlurImage(self.backGroundPicture)
         tableView.backgroundColor = UIColor.clearColor()
         self.reminders = RealmHelper.retrieveReminders()
         //camera

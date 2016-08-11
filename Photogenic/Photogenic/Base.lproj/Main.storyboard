@@ -18,9 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundLookat" translatesAutoresizingMaskIntoConstraints="NO" id="kEf-xb-cEs">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
-                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hMQ-NC-vdL">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -78,20 +75,16 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="VaN-OO-pcF" firstAttribute="top" secondItem="kEf-xb-cEs" secondAttribute="bottom" id="1xO-7f-nes"/>
-                            <constraint firstItem="kEf-xb-cEs" firstAttribute="leading" secondItem="RZV-z4-Uq6" secondAttribute="leading" id="CE6-Zw-9MS"/>
                             <constraint firstItem="hMQ-NC-vdL" firstAttribute="top" secondItem="1nn-xL-BdZ" secondAttribute="bottom" id="MFx-Kl-GTJ"/>
                             <constraint firstItem="VaN-OO-pcF" firstAttribute="top" secondItem="hMQ-NC-vdL" secondAttribute="bottom" id="PFp-he-3S9"/>
-                            <constraint firstAttribute="trailing" secondItem="kEf-xb-cEs" secondAttribute="trailing" id="TIJ-pG-OPQ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="hMQ-NC-vdL" secondAttribute="trailing" constant="-20" id="eIe-9t-V7F"/>
                             <constraint firstItem="hMQ-NC-vdL" firstAttribute="leading" secondItem="RZV-z4-Uq6" secondAttribute="leadingMargin" constant="-20" id="kJp-Lb-9Yz"/>
-                            <constraint firstItem="kEf-xb-cEs" firstAttribute="top" secondItem="1nn-xL-BdZ" secondAttribute="bottom" id="wJg-8v-VMh"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="rY5-fn-Qo3" appends="YES" id="0sI-Lq-fif"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" title="List of Reminders" id="hxt-Yu-usn">
+                    <navigationItem key="navigationItem" title="Photogenic" id="hxt-Yu-usn">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="OyY-CS-Lze">
                             <connections>
                                 <action selector="addReminder:" destination="Cas-Ww-mZ4" id="lgg-Gc-LAw"/>
@@ -99,7 +92,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="backGroundPicture" destination="kEf-xb-cEs" id="Wfs-e4-zP9"/>
                         <outlet property="tableView" destination="hMQ-NC-vdL" id="ksB-aD-Fys"/>
                         <segue destination="Ql4-hg-hg1" kind="show" identifier="cameraToEdit" id="hU9-Iy-Eft"/>
                         <segue destination="EYo-uI-3Au" kind="show" identifier="ViewReminder" id="LN7-Q1-RAf"/>
@@ -177,14 +169,14 @@
                                     <constraint firstAttribute="height" constant="52" id="xsV-eg-dYe"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MpJ-zu-svV">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MpJ-zu-svV">
                                 <rect key="frame" x="30" y="91" width="540" height="23"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="23" id="kpI-Hk-cBp"/>
                                 </constraints>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rectangle 5" translatesAutoresizingMaskIntoConstraints="NO" id="7Ug-gY-eOp">
@@ -359,7 +351,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5ZH-m7-mEV">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5ZH-m7-mEV">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -418,7 +410,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BackgroundLookat" width="750" height="1334"/>
         <image name="Rectangle 3" width="348" height="600"/>
         <image name="Rectangle 4" width="320" height="52"/>
         <image name="Rectangle 5" width="320" height="143"/>
