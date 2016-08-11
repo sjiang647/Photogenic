@@ -15,7 +15,7 @@ class Reminder: Object{
     dynamic var time = ""
     dynamic var name = ""
     //dynamic var reminderDescription = ""
-    dynamic var img: NSData?
+    dynamic var img: String?
     //dynamic var notification: UILocalNotification?
     dynamic var uuid = NSUUID().UUIDString
     override class func primaryKey() -> String? {

@@ -17,6 +17,7 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
     var img: UIImage?
     var date: NSDate?
     var selectedRecminder:Reminder?
+    let photoSavingHelperInstance = PhotoSavingHelper.sharedInstance
     var reminders: Results<Reminder>! {
         didSet {
             tableView.reloadData()
@@ -143,8 +144,8 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
         //setters
         cell.cellName.text = reminders[row].name
         //imer is converting the img NSData from the reminder model to a UIImage to display in the background
-        let imer = UIImage(data: reminders[row].img!)
-        
+//        let imer = UIImage(data: reminders[row].img!)
+        let imer = self.photoSavingHelperInstance.loadImageFromPath(reminders[row].img!)
         cell.cellTime.text = reminders[row].doot!.convertToString()
         //cell.cellDescription.text = reminder.reminderDescription
         cell.backgroundImage.image = imer

@@ -129,7 +129,15 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate,UITableVi
             newReminder.doot = dateNSFormat
             print(newReminder.doot)
             print(newReminder.time)
-            newReminder.img = UIImagePNGRepresentation(self.img!)
+//            newReminder.img = UIImagePNGRepresentation(self.img!)
+            let sharedInstance = PhotoSavingHelper.sharedInstance
+            let imageName = sharedInstance.getNumberOfImages()
+            let result = sharedInstance.saveImage(self.img!, name: imageName)
+            if result {
+                newReminder.img = "\(imageName).png"
+            }else{
+                print("failed to save image")
+            }
             if self.reminder == nil{
             }else{
                 if self.reminder!.annotations.count == 0 {
