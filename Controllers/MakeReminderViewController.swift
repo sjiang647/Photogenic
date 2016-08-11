@@ -44,6 +44,7 @@ class MakeReminderViewController: UIViewController, UITextViewDelegate,UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
         nameTextField.attributedPlaceholder = NSAttributedString(string:"Name for reminder",
                                                                  attributes:[NSForegroundColorAttributeName: UIColor(netHex: 0xAFB2B2)])
         datePicker.setValue(UIColor.whiteColor(), forKeyPath: "textColor")

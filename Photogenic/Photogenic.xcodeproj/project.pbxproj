@@ -188,7 +188,7 @@
 				TargetAttributes = {
 					CF2695C21D343D2900C77D5E = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = D4AJ56MMMV;
+						DevelopmentTeam = BG2VA74GDQ;
 					};
 				};
 			};
@@ -403,10 +403,13 @@
 			baseConfigurationReference = 66C9CF621089DF2C496243FF /* Pods-Photogenic.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Photogenic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.makeschool.Photogenic;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stevejiang.photogenic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -415,10 +418,13 @@
 			baseConfigurationReference = 7E35A882B60D1AE2805186F4 /* Pods-Photogenic.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Photogenic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.makeschool.Photogenic;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stevejiang.photogenic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

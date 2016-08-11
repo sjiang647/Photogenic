@@ -37,7 +37,7 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
                 print("no rear camera detected")
             }
         } else {
-                        self.img = UIImage(named: "happiestman")
+                        self.img = UIImage(named: "Example")
                         self.performSegueWithIdentifier("cameraToEdit", sender: self)
             print("camera inaccessible")
         }
@@ -110,7 +110,7 @@ class ListRemindersViewController: UIViewController, UITableViewDelegate, UITabl
                 print("no rear camera detected")
             }
         } else {
-                        self.img = UIImage(named: "happiestman")
+                        self.img = UIImage(named: "Example")
                         self.performSegueWithIdentifier("addReminder", sender: self)
             print("camera inaccessible")
         }

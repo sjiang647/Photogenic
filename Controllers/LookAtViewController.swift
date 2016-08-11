@@ -25,6 +25,9 @@ class LookAtViewController: UIViewController{
             let DynamicView=UIView(frame: frame)
             let imag = UIImageView(image: UIImage(named: "Rectangle 4"))
             imag.frame = CGRectMake(-5, 0, 160, 30)
+            imag.makeBlurImage(imag)
+            imag.layer.cornerRadius = 10
+            imag.layer.masksToBounds = true
             DynamicView.addSubview(imag)
             DynamicView.backgroundColor=UIColor.clearColor()
             DynamicView.layer.cornerRadius=10

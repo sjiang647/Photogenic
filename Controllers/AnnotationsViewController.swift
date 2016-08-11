@@ -57,6 +57,10 @@ class AnnotationsViewController: UIViewController,  UIGestureRecognizerDelegate{
                 }
 
                 let imag = UIImageView(image: UIImage(named: "Rectangle 4"))
+                imag.makeBlurImage(imag)
+                imag.layer.cornerRadius = 10
+                imag.layer.masksToBounds = true
+
                 imag.frame = CGRectMake(-5, 0, 160, 30)
                 DynamicView.addSubview(imag)
                 DynamicView.addSubview(text)
@@ -106,6 +110,10 @@ class AnnotationsViewController: UIViewController,  UIGestureRecognizerDelegate{
             text.becomeFirstResponder()
             let imag = UIImageView(image: UIImage(named: "Rectangle 4"))
             imag.frame = CGRectMake(-5, 0, 160, 30)
+            imag.makeBlurImage(imag)
+            imag.layer.cornerRadius = 10
+            imag.layer.masksToBounds = true
+
             DynamicView.addSubview(imag)
             DynamicView.addSubview(text)
             self.view.addSubview(DynamicView)

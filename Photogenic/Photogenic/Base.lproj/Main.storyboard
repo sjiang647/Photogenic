@@ -84,7 +84,7 @@
                             <outletCollection property="gestureRecognizers" destination="rY5-fn-Qo3" appends="YES" id="0sI-Lq-fif"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" title="Photogenic" id="hxt-Yu-usn">
+                    <navigationItem key="navigationItem" title="Fotographic" id="hxt-Yu-usn">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="OyY-CS-Lze">
                             <connections>
                                 <action selector="addReminder:" destination="Cas-Ww-mZ4" id="lgg-Gc-LAw"/>
@@ -407,6 +407,11 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qgu-gR-qJI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.85490196078431369" green="0.87450980392156863" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.0" green="0.58823529411764708" blue="0.80784313725490198" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.85490196078431369" green="0.87450980392156863" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
